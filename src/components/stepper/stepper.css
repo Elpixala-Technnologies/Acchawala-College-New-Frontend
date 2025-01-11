@@ -1,0 +1,69 @@
+.stepperDiv {
+  z-index: 3;
+}
+
+.stepperDiv .progressBarDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.stepperDiv .progressBarContainer {
+  position: relative;
+  width: 100%;
+}
+.stepperDiv .steps {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  z-index: 9;
+}
+.stepperDiv .step {
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f97316;
+}
+.stepperDiv .step.selected {
+  border: 2px double #f97316;
+}
+.stepperDiv .step.completed {
+  border: 2px double #f3f4f5;
+  background: #2188ff;
+}
+.stepperDiv .progress {
+  position: absolute;
+  width: 96.5%;
+  height: 32%; left: 8px;
+  z-index: 3;
+  transition: background 0.5s;
+}
+
+@media not all and (min-width: 640px) {
+  .stepperDiv .progress {
+    height: 50%;
+  }
+}
+.stepperDiv .percent {
+  margin-top: 2px;
+  position: absolute;
+  width: 0;
+  height: 100%;
+  z-index: -1;
+  transition: width 1s;
+}
+.stepperDiv .defaultBtn {
+  background: #3a4047;
+  color: #f3f4f5;
+  cursor: pointer;
+  outline: 0;
+  box-shadow: none;
+  padding: 0.4em 1em;
+  border: none;
+  border-radius: 45px;
+}

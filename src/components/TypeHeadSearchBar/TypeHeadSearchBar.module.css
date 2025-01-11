@@ -1,0 +1,30 @@
+.customInput {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 4px;
+  padding-left: 10px;
+  width: 100% !important;
+}
+
+.customMenuItem {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #bababa;
+  padding: 10px;
+  display: flex;
+  gap: 0.75rem;
+  text-transform: capitalize;
+}
+
+.customMenuItem:hover {
+  background-color: #ffd88b;
+}
+
+.customTypeLabel {
+  font-weight: bold;
+  color: #6c757d;
+  text-transform: capitalize;
+}
+
+.rbt-menu {
+  background-color: white !important;
+}
