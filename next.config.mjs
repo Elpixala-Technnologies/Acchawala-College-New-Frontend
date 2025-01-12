@@ -2,7 +2,7 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-        domains: ['college-dakhla-img-bucket.blr1.digitaloceanspaces.com'],
+        domains: ['acchawala-college.blr1.digitaloceanspaces.com'],
       },
 };
 
