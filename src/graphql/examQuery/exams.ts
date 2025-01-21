@@ -17,7 +17,7 @@ export const getAllExams = gql`
         examName: { containsi: $searchByExamName }
         streams: { stream: { in: $streams } }
         ExaminationLevel: { ExaminationLevel: { in: $ExaminationLevels } }
-        eligibilityLevel: { eligibilityLevel: { in: $eligibilityLevels } }
+        eligibilityLevels: { eligibilityLevel: { in: $eligibilityLevels } }
         mode: { examMode: { in: $modes } }
       }
       pagination: { page: $page, pageSize: $pageSize }
