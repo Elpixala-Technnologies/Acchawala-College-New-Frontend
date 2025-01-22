@@ -58,7 +58,7 @@ export const getExamDetails = gql`
               }
             }
           }
-          eligibilityLevel {
+          eligibilityLevels {
             data {
               id
               attributes {
