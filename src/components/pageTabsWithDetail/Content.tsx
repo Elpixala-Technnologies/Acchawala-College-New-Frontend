@@ -16,12 +16,14 @@ import { getAllCourses } from "@/graphql/collegeQuery/colleges";
 import { useQuery } from "@apollo/client";
 import RelatedCourses from "./RelatedCourses";
 
-export default function Content({ selectedContent, slug, breadCrumb }: any) {
+export default function Content({ selectedContent, slug, breadCrumb, reviewsAndRatings }: any) {
   const [isExpanded, setIsExpanded] = useState(true);
+  const [galleryCategory, setGalleryCategory] = useState("hostels");
   // const isMobile = useIsMobile(1030);
   // const toggleReadMore = () => {
   //   setIsExpanded((prev) => !prev);
   // };
+  // console.log(selectedContent, "  selected content")
 
   return (
     <div className="w-full overflow-x-hidden md:[flex:8]">
@@ -67,7 +69,8 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
             return groupedVideos;
           };
           const videoGalleries = section?.videoGallery || [];
-          const groupedVideos = groupVideosByCategory(videoGalleries);
+          const groupedVideos = groupVideosByCategory(videoGalleries)
+          // console.log(section, "  section");
           // ==============================================
           return (
             <div
@@ -95,17 +98,17 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
                 <div className="mb-8 flex items-center gap-x-2">
                   {section?.author?.data?.attributes?.avatar?.data?.attributes
                     ?.url && (
-                    <Image
-                      src={
-                        section?.author?.data?.attributes?.avatar?.data
-                          ?.attributes?.url
-                      }
-                      alt="avatar"
-                      className="h-16 w-16 rounded-full"
-                      width={48}
-                      height={48}
-                    />
-                  )}
+                      <Image
+                        src={
+                          section?.author?.data?.attributes?.avatar?.data
+                            ?.attributes?.url
+                        }
+                        alt="avatar"
+                        className="h-16 w-16 rounded-full"
+                        width={48}
+                        height={48}
+                      />
+                    )}
                   <div className="flex flex-col gap-2">
                     {section?.author?.data?.attributes?.name && (
                       <p className="text-3xl font-bold text-orange-500">
@@ -134,9 +137,8 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
               {section?.quote && (
                 <>
                   <div
-                    className={`my-2 mb-5 text-wrap border-l-4 border-orange-500 py-2 pl-5 text-justify text-lg font-medium italic text-black ${
-                      isExpanded ? "" : "line-clamp-4"
-                    }`}
+                    className={`my-2 mb-5 text-wrap border-l-4 border-orange-500 py-2 pl-5 text-justify text-lg font-medium italic text-black ${isExpanded ? "" : "line-clamp-4"
+                      }`}
                     dangerouslySetInnerHTML={{ __html: section?.quote }}
                   />
                 </>
@@ -270,7 +272,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
                 </div>
               )}
               {/* banner  */}
-              {section?.bannerText && (
+              {section?.bannerTitle && (
                 <div className="relative my-5">
                   <Image
                     src={section?.bannerImage?.data?.[0]?.attributes?.url}
@@ -290,30 +292,91 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
               {section?.accordion && <TimelineList data={section?.accordion} />}
               {/* Photo Gallery  */}
               {section?.imageGallery && (
-                <>
-                  {Object.keys(groupedImages).map((category, index) => (
-                    <div key={index} className="mt-5">
-                      <h3 className="my-3 text-xl font-semibold capitalize">
-                        {category}
-                      </h3>
-                      <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-                        {groupedImages[category].map(
-                          (image: any, i: number) => (
-                            <Image
-                              key={i}
-                              src={image?.url}
-                              width={800}
-                              height={800}
-                              alt={`${category} image`}
-                              className="h-full max-h-[200px] w-full flex-wrap rounded-lg object-cover"
-                            />
-                          ),
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </>
-              )}
+                <div className=" ">
+                  <div className="flex justify-start items-center gap-5">
+                    {Object.keys(groupedImages).map((category, index) => {
+
+                      return (
+                        <h3
+                          onClick={() => setGalleryCategory(category)}
+                          className={`my-3 text-lg capitalize px-7 py-[7px] rounded-3xl hover:cursor-pointer hover:bg-orange-500  ${galleryCategory === category ? "bg-orange-500" : "bg-[#FF820E66]"}`}
+                        >
+                          {category}</h3>
+                      )
+                    })}
+                  </div>
+
+                  <div className="flex w-full items-center justify-center h-[251px] ">
+                    {Object.keys(groupedImages).map((category, index) => {
+
+                      if (category === galleryCategory) {
+                        const len = groupedImages[category].length;
+                        return (
+                          <div className={`w-full mt-8 h-full grid grid-cols-4 grid-rows-2 justify-around gap-5 }`}>
+                            {groupedImages[category].map(
+                              (image: any, i: number) => {
+                                if (i > 4) return;
+                                if (i === 0) {
+                                  return (
+                                    <div className="min-h-full min-w-[442px] bg-cover col-span-2 row-span-2">
+                                      <Image
+                                        key={i}
+                                        src={image?.url}
+                                        width={442}
+                                        height={300}
+                                        alt={`${category} image`}
+                                        className="h-full w-full flex-wrap rounded-lg object-cover"
+                                      />
+                                    </div>
+                                  )
+                                }
+                                if (i == len - 1 || i == 4) {
+                                  return (
+                                    <div className="bg-cover relative rounded-lg overflow-hidden">
+                                      <div
+                                        className="w-full h-full absolute bg-[#0000008C] top-0 left-0 flex justify-center items-center text-white hover:underline cursor-pointer"
+                                        onClick={() => {
+
+                                        }}
+                                      >
+                                        See more
+                                      </div>
+                                      <Image
+                                        key={i}
+                                        src={image?.url}
+                                        width={100}
+                                        height={100}
+                                        alt={`${category} image`}
+                                        className="h-full w-full flex-wrap  object-cover"
+                                      />
+                                    </div>
+                                  )
+                                }
+                                return (
+                                  <div className="">
+                                    <Image
+                                      key={i}
+                                      src={image?.url}
+                                      width={100}
+                                      height={100}
+                                      alt={`${category} image`}
+                                      className="h-full w-full flex-wrap rounded-lg object-cover"
+                                    />
+                                  </div>
+                                )
+                              },
+                            )}
+                          </div>)
+                      }
+                      return
+                    }
+
+                    )}
+                  </div>
+
+                </div>
+              )
+              }
               {/* Video Gallery  */}
               {section?.videoGallery && (
                 <>
@@ -360,7 +423,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
               )}
               {/* Review  */}
               {section?.reviewsText && (
-                <ReviewsAndRatingsSection data={section?.reviewsAndRatings} />
+                <ReviewsAndRatingsSection data={reviewsAndRatings} />
               )}
               {/* Related Courses  */}
               {section?.courseText && (
@@ -373,24 +436,37 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
             </div>
           );
         })}
-    </div>
+    </div >
   );
 }
 
 function ReviewsAndRatingsSection({ data }: any) {
+  // console.log(data, "  reviews data")
+  let sumOfRating = 0
+  let numberOfRating = 0
+  data?.forEach((review: any) => {
+    // console.log(review)
+    review?.DifficultyLevel?.rating && (sumOfRating += Number(review?.DifficultyLevel?.rating) && numberOfRating++)
+    review?.ExamPattern?.rating && (sumOfRating += Number(review?.ExamPattern?.rating) && numberOfRating++)
+    review?.FairnessandTransparency?.rating && (sumOfRating += Number(review?.FairnessandTransparency?.rating) && numberOfRating++)
+    review?.PreparationResources?.rating && (sumOfRating += Number(review?.PreparationResources?.rating) && numberOfRating++)
+    review?.SyllabusCoverage?.rating && (sumOfRating += Number(review?.SyllabusCoverage?.rating) && numberOfRating++)
+  })
+  const overallRating = sumOfRating / numberOfRating
+  // console.log(sumOfRating, numberOfRating)
   return (
     <div className="w-full space-y-5">
       <div className="my-5 flex items-center justify-around gap-3 max-md:flex-col max-md:gap-5">
         {/* Overall Rating Section  */}
         <div className="flex-center flex-col rounded-2xl bg-orange-200 p-5">
-          <h2 className="text-7xl font-semibold">{data?.overallRating}</h2>
+          <h2 className="text-7xl font-semibold">{overallRating}</h2>
           <div>
             <StarRating
-              rating={data?.overallRating}
+              rating={overallRating}
               className="gap-2 text-lg text-orange-500"
             />
           </div>
-          <p>({data?.totalReviews} Reviews)</p>
+          <p>({data?.length} Reviews)</p>
         </div>
         {/* Rating according to number  */}
         <div className="space-y-2 max-sm:mb-3 max-sm:w-full">
@@ -448,7 +524,7 @@ function ReviewsAndRatingsSection({ data }: any) {
               <p className="flex items-center gap-2">
                 {review?.rating} <FaStar className="text-orange-500" />
               </p>
-              {/* <p className="text-nowrap">based on ({review?.basedOn} )</p> */}
+              <p className="text-nowrap">based on ({review?.basedOn} )</p>
             </div>
           ))}
       </div>

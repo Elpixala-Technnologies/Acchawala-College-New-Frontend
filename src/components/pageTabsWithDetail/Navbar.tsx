@@ -42,7 +42,7 @@ export default function Navbar({ navItems, onSelect, selectedIndex }: any) {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
+  // console.log(navItems, "   navItems")
   return (
     <nav className="relative w-full border-b border-zinc-400 text-black">
       <ul
@@ -54,14 +54,14 @@ export default function Navbar({ navItems, onSelect, selectedIndex }: any) {
           <>
             <li key={index}>
               <button
-                className={`text-nowrap py-5 capitalize ${
-                  selectedIndex === index
-                    ? "border-b-4 border-black text-lg text-orange-500 duration-100"
-                    : ""
-                }`}
+                className={`text-nowrap py-5 capitalize ${selectedIndex === index
+                  ? "border-b-4 border-black text-lg text-orange-500 duration-100"
+                  : ""
+                  }`}
                 onClick={() => onSelect(index)}
               >
                 {item.navItem}
+                {/* {item.navItem} */}
               </button>
             </li>
           </>

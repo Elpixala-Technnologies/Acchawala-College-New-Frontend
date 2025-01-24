@@ -42,6 +42,7 @@ export default function ExamDetailsPage({ params }: Props) {
   } = useQuery(getExamDetails, {
     variables: { ID: examId },
   });
+  // console.log(examData)
 
   const {
     loading: topCourseLoading,
@@ -77,6 +78,7 @@ export default function ExamDetailsPage({ params }: Props) {
       const convertedData: any = convertQueryDataToTabSections(
         examData?.exam?.data?.attributes?.PageData,
       );
+      console.log(convertedData, " converted data")
       setTabSelectionArray(convertedData);
     }
   }, [examData]);
@@ -169,6 +171,7 @@ export default function ExamDetailsPage({ params }: Props) {
           description={examData?.exam?.data?.attributes?.description}
           updatedAt={examData?.exam?.data?.attributes?.updatedAt}
           tabUrlValue={"exams"}
+          reviewsAndRatings={examData?.exam?.data?.attributes?.ExamReviewsAndRatings}
         />
       ) : (
         <PageTabsWithDetailSkeleton />
