@@ -29,7 +29,7 @@ export const getCourseDetailsBanner = gql`
 `;
 
 export const getCourseDetails = gql`
-  query getCourseDetails($ID: ID!) {
+query getCourseDetails($ID: ID!) {
     course(id: $ID) {
       data {
         id
@@ -72,26 +72,6 @@ export const getCourseDetails = gql`
               }
             }
           }
-          videoGalleryTitle {
-            title {
-              t1
-              t2
-              t3
-            }
-          }
-          videoGallery {
-            id
-            category
-
-            video {
-              data {
-                id
-                attributes {
-                  videoId
-                }
-              }
-            }
-          }
           courseLevel {
             data {
               id
@@ -106,56 +86,6 @@ export const getCourseDetails = gql`
               attributes {
                 stream
               }
-            }
-          }
-          imageGalleryTitle {
-            title {
-              t1
-              t2
-              t3
-            }
-          }
-          imageGallery {
-            id
-            category
-
-            images {
-              data {
-                id
-                attributes {
-                  alternativeText
-                  width
-                  height
-                  url
-                }
-              }
-            }
-          }
-          CourseReviewsAndRatings {
-            id
-            userName
-            overall {
-              description
-            }
-            CourseContent {
-              rating
-              description
-            }
-            TeachingQuality {
-              rating
-              description
-            }
-            LearningResources {
-              rating
-              description
-            }
-            IndustryRelevance {
-              rating
-              description
-            }
-            CareerProspects {
-              rating
-              description
             }
           }
           PageData {
@@ -187,72 +117,6 @@ export const getCourseDetails = gql`
                 }
               }
             }
-            ... on ComponentCommonReviewsComponent {
-              id
-              title {
-                t1
-                t2
-                t3
-              }
-              headingIcon {
-                data {
-                  id
-                  attributes {
-                    width
-                    height
-                    url
-                  }
-                }
-              }
-              reviewsText: text
-              navItem {
-                data {
-                  id
-                  attributes {
-                    navItem
-                  }
-                }
-              }
-            }
-            ... on ComponentCommonGalleryComponent {
-              id
-              headingIcon {
-                data {
-                  id
-                  attributes {
-                    width
-                    height
-                    url
-                  }
-                }
-              }
-              galleryText: text
-              imageGallery {
-                id
-                category
-                images {
-                  data {
-                    id
-                    attributes {
-                      url
-                    }
-                  }
-                }
-              }
-              title {
-                t1
-                t2
-                t3
-              }
-              navItem {
-                data {
-                  id
-                  attributes {
-                    navItem
-                  }
-                }
-              }
-            }
             ... on ComponentCommonFaqComponent {
               id
               title {
@@ -264,72 +128,6 @@ export const getCourseDetails = gql`
                 id
                 question
                 answer
-              }
-              navItem {
-                data {
-                  id
-                  attributes {
-                    navItem
-                  }
-                }
-              }
-            }
-            ... on ComponentCommonMainGalleryComponent {
-              id
-              title {
-                t1
-                t2
-                t3
-              }
-              headingIcon {
-                data {
-                  id
-                  attributes {
-                    width
-                    height
-                    url
-                  }
-                }
-              }
-              mainGalleryText: text
-              navItem {
-                data {
-                  id
-                  attributes {
-                    navItem
-                  }
-                }
-              }
-            }
-            ... on ComponentCommonVideoComponent {
-              id
-              headingIcon {
-                data {
-                  id
-                  attributes {
-                    width
-                    height
-                    url
-                  }
-                }
-              }
-              videoText: text
-              title {
-                t1
-                t2
-                t3
-              }
-              videoGallery {
-                id
-                category
-                video {
-                  data {
-                    id
-                    attributes {
-                      videoId
-                    }
-                  }
-                }
               }
               navItem {
                 data {
@@ -365,35 +163,6 @@ export const getCourseDetails = gql`
                 }
               }
             }
-            ... on ComponentCommonReviewDescriptionComponent {
-              id
-              title {
-                t1
-                t2
-                t3
-              }
-              headingIcon {
-                data {
-                  id
-                  attributes {
-                    alternativeText
-                    width
-                    height
-                    url
-                  }
-                }
-              }
-              reviewDescriptionText: text
-              navbar {
-                data {
-                  id
-                  attributes {
-                    navItem
-                  }
-                }
-              }
-            }
-
             ... on ComponentCommonNewsComponent {
               id
               title {
@@ -467,5 +236,4 @@ export const getCourseDetails = gql`
         }
       }
     }
-  }
-`;
+  }`;
