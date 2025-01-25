@@ -15,10 +15,13 @@ import CourseFilteredCard from "../cardsAndSliders/CourseFilteredCard";
 import { getAllCourses } from "@/graphql/collegeQuery/colleges";
 import { useQuery } from "@apollo/client";
 import RelatedCourses from "./RelatedCourses";
+import collegeIcon from "@/assets/icons/College.png"
+import ImageGalleryPopup from "./ImageGalleryPopup";
 
 export default function Content({ selectedContent, slug, breadCrumb, reviewsAndRatings }: any) {
   const [isExpanded, setIsExpanded] = useState(true);
   const [galleryCategory, setGalleryCategory] = useState("hostels");
+  const [galleryPopup, setGalleryPopup] = useState(false);
   // const isMobile = useIsMobile(1030);
   // const toggleReadMore = () => {
   //   setIsExpanded((prev) => !prev);
@@ -70,13 +73,14 @@ export default function Content({ selectedContent, slug, breadCrumb, reviewsAndR
           };
           const videoGalleries = section?.videoGallery || [];
           const groupedVideos = groupVideosByCategory(videoGalleries)
-          // console.log(section, "  section");
+          console.log(Object.keys(groupedImages), "  section");
           // ==============================================
           return (
             <div
               key={index}
               className="mt-5 w-full rounded-2xl bg-white p-5 md:min-w-[550px]"
             >
+
               {/* Title */}
               {section?.title && (
                 <h2 className="mb-4 border-b border-zinc-500 pb-4 text-2xl font-bold capitalize">
@@ -293,6 +297,7 @@ export default function Content({ selectedContent, slug, breadCrumb, reviewsAndR
               {/* Photo Gallery  */}
               {section?.imageGallery && (
                 <div className=" ">
+                  {galleryPopup && <ImageGalleryPopup images={groupedImages[galleryCategory]} onClose={() => setGalleryPopup(false)} />}
                   <div className="flex justify-start items-center gap-5">
                     {Object.keys(groupedImages).map((category, index) => {
 
@@ -308,17 +313,19 @@ export default function Content({ selectedContent, slug, breadCrumb, reviewsAndR
 
                   <div className="flex w-full items-center justify-center h-[251px] ">
                     {Object.keys(groupedImages).map((category, index) => {
-
+                      console.log(groupedImages[galleryCategory])
                       if (category === galleryCategory) {
                         const len = groupedImages[category].length;
                         return (
                           <div className={`w-full mt-8 h-full grid grid-cols-4 grid-rows-2 justify-around gap-5 }`}>
-                            {groupedImages[category].map(
+                            {groupedImages[category].slice(0, 5).map(
                               (image: any, i: number) => {
-                                if (i > 4) return;
                                 if (i === 0) {
                                   return (
-                                    <div className="min-h-full min-w-[442px] bg-cover col-span-2 row-span-2">
+                                    <div
+                                      onClick={() => setGalleryPopup(true)}
+                                      className="min-h-full min-w-[442px] bg-cover col-span-2 row-span-2 cursor-pointer"
+                                    >
                                       <Image
                                         key={i}
                                         src={image?.url}
@@ -332,7 +339,10 @@ export default function Content({ selectedContent, slug, breadCrumb, reviewsAndR
                                 }
                                 if (i == len - 1 || i == 4) {
                                   return (
-                                    <div className="bg-cover relative rounded-lg overflow-hidden">
+                                    <div
+                                      onClick={() => setGalleryPopup(true)}
+                                      className="bg-cover relative rounded-lg overflow-hidden"
+                                    >
                                       <div
                                         className="w-full h-full absolute bg-[#0000008C] top-0 left-0 flex justify-center items-center text-white hover:underline cursor-pointer"
                                         onClick={() => {
@@ -353,7 +363,10 @@ export default function Content({ selectedContent, slug, breadCrumb, reviewsAndR
                                   )
                                 }
                                 return (
-                                  <div className="">
+                                  <div
+                                    onClick={() => setGalleryPopup(true)}
+                                    className="cursor-pointer"
+                                  >
                                     <Image
                                       key={i}
                                       src={image?.url}
@@ -441,19 +454,73 @@ export default function Content({ selectedContent, slug, breadCrumb, reviewsAndR
 }
 
 function ReviewsAndRatingsSection({ data }: any) {
-  // console.log(data, "  reviews data")
-  let sumOfRating = 0
-  let numberOfRating = 0
-  data?.forEach((review: any) => {
-    // console.log(review)
-    review?.DifficultyLevel?.rating && (sumOfRating += Number(review?.DifficultyLevel?.rating) && numberOfRating++)
-    review?.ExamPattern?.rating && (sumOfRating += Number(review?.ExamPattern?.rating) && numberOfRating++)
-    review?.FairnessandTransparency?.rating && (sumOfRating += Number(review?.FairnessandTransparency?.rating) && numberOfRating++)
-    review?.PreparationResources?.rating && (sumOfRating += Number(review?.PreparationResources?.rating) && numberOfRating++)
-    review?.SyllabusCoverage?.rating && (sumOfRating += Number(review?.SyllabusCoverage?.rating) && numberOfRating++)
+  console.log(data, "  reviews data")
+  const [averageRatings, setAverageRatings] = useState<any>({
+    DifficultyLevel: 0,
+    ExamPattern: 0,
+    FairnessandTransparency: 0,
+    PreparationResources: 0,
+    SyllabusCoverage: 0
   })
-  const overallRating = sumOfRating / numberOfRating
-  // console.log(sumOfRating, numberOfRating)
+
+  function categoryAverageRating(data: any, averageRatings: any) {
+    // averageRatings.forEach((keys: any) => {
+    data.forEach((review: any) => {
+      for (const key in review) {
+        if (key in averageRatings) {
+          const sumPlus = averageRatings[key] + review[key]?.rating ? Number(review[key]?.rating) : 0
+          setAverageRatings({ ...averageRatings, key: sumPlus })
+          // console.log(averageRatings[key], key)
+        } else {
+          continue;
+        }
+      }
+    })
+    for (const key in averageRatings) {
+      const average = averageRatings[key] / data.length
+      // setAverageRatings(preState => ({ ...preState, key:   }))
+      // setAverageRatings({ ...averageRatings, key: average })
+    }
+  }
+
+  // console.log(categoryAverageRating(data, averageRatings))
+
+  useEffect(() => {
+    categoryAverageRating(data, averageRatings)
+    console.log(averageRatings)
+  }, [data])
+
+  function calculateOverAllRating(data: any) {
+    let totalNumberRating = 0
+    let sumOfRating = 0
+    data?.forEach((review: any) => {
+      for (const key in review) {
+        if (review[key]?.rating) {
+          // console.log(review[key])
+          sumOfRating += Number(review[key]?.rating) ? Number(review[key]?.rating) : 0
+          totalNumberRating++
+        }
+      }
+    })
+    return sumOfRating / totalNumberRating
+  }
+
+  function percentageOfRating(data: any, stars: number) {
+    let totalNumberRating = 0
+    let count = 0
+    data?.forEach((review: any) => {
+      for (const key in review) {
+        (review[key]?.rating) && totalNumberRating++
+
+        if (Number(review[key]?.rating) === stars) {
+          count++
+        }
+      }
+    })
+    return ((count / totalNumberRating) * 100).toFixed(0)
+  }
+
+  const overallRating = calculateOverAllRating(data)
   return (
     <div className="w-full space-y-5">
       <div className="my-5 flex items-center justify-around gap-3 max-md:flex-col max-md:gap-5">
@@ -474,41 +541,41 @@ function ReviewsAndRatingsSection({ data }: any) {
             <p className="mr-2 flex items-center gap-2 text-2xl font-semibold">
               5 <FaStar className="text-orange-500" />
             </p>
-            <ProgressBar value={"90"} />
-            <p className="ml-2 text-xl">(90%)</p>
+            <ProgressBar value={percentageOfRating(data, 5)} />
+            <p className="ml-2 text-xl">({percentageOfRating(data, 5)}%)</p>
           </div>
           <div className="!my-3 flex items-center gap-3">
             <p className="mr-2 flex items-center gap-2 text-2xl font-semibold">
               4 <FaStar className="text-orange-500" />
             </p>
-            <ProgressBar value={"73"} />
-            <p className="ml-2 text-xl">(73%)</p>
+            <ProgressBar value={percentageOfRating(data, 4)} />
+            <p className="ml-2 text-xl">({percentageOfRating(data, 4)}%)</p>
           </div>
           <div className="!my-3 flex items-center gap-3">
             <p className="mr-2 flex items-center gap-2 text-2xl font-semibold">
               3 <FaStar className="text-orange-500" />
             </p>
-            <ProgressBar value={"44"} />
-            <p className="ml-2 text-xl">(44%)</p>
+            <ProgressBar value={percentageOfRating(data, 3)} />
+            <p className="ml-2 text-xl">({percentageOfRating(data, 3)}%)</p>
           </div>
           <div className="!my-3 flex items-center gap-3">
             <p className="mr-2 flex items-center gap-2 text-2xl font-semibold">
               2 <FaStar className="text-orange-500" />
             </p>
-            <ProgressBar value={"75"} />
-            <p className="ml-2 text-xl">(75%)</p>
+            <ProgressBar value={percentageOfRating(data, 2)} />
+            <p className="ml-2 text-xl">({percentageOfRating(data, 2)}%)</p>
           </div>
           <div className="!my-3 flex items-center justify-between gap-3">
             <p className="mr-2 flex items-center gap-2 text-2xl font-semibold">
               1 <FaStar className="text-orange-500" />
             </p>
-            <ProgressBar value={"30"} />
-            <p className="ml-2 text-xl">(30%)</p>
+            <ProgressBar value={percentageOfRating(data, 1)} />
+            <p className="ml-2 text-xl">({percentageOfRating(data, 1)}%)</p>
           </div>
         </div>
       </div>
       <div className="my-5 flex items-stretch justify-between gap-5 overflow-x-auto text-center sm:!mt-14">
-        {data?.individualReviews
+        {/* {data?.individualReviews
           ?.slice(0, 5)
           .map((review: any, index: number) => (
             <div key={index} className="flex-center min-w-28 flex-col">
@@ -520,13 +587,32 @@ function ReviewsAndRatingsSection({ data }: any) {
                   height={50}
                 />
               </div>
-              <p>{review?.title}</p>
+              <p>{review[index]}</p>
               <p className="flex items-center gap-2">
-                {review?.rating} <FaStar className="text-orange-500" />
+                {review[index]?.rating} <FaStar className="text-orange-500" />
               </p>
               <p className="text-nowrap">based on ({review?.basedOn} )</p>
             </div>
-          ))}
+          ))} */}
+        {Object.keys(averageRatings)?.slice(0, 5).map((item: any, index: number) => {
+          return (
+            <div key={index} className="flex-center min-w-28 flex-col">
+              <div className="flex-center rounded-lg bg-orange-300 p-2">
+                <Image
+                  src={collegeIcon}
+                  alt="icon"
+                  width={50}
+                  height={50}
+                />
+              </div>
+              <p>{item}</p>
+              <p className="flex items-center gap-2">
+                {averageRatings[item]} <FaStar className="text-orange-500" />
+              </p>
+              {/* <p className="text-nowrap">based on ({item} )</p> */}
+            </div>
+          )
+        })}
       </div>
     </div>
   );
