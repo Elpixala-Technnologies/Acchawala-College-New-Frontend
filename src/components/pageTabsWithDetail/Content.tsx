@@ -16,17 +16,18 @@ import { getAllCourses } from "@/graphql/collegeQuery/colleges";
 import { useQuery } from "@apollo/client";
 import RelatedCourses from "./RelatedCourses";
 import collegeIcon from "@/assets/icons/College.png"
-import ImageGalleryPopup from "./ImageGalleryPopup";
+import ImageGalleryPopup from "./ImageGallery";
+import { IoIosCalendar } from "react-icons/io";
+import TypeHeadSearchBar from "../TypeHeadSearchBar/TypeHeadSearchBar";
+import ImageGallery from "./ImageGallery";
 
-export default function Content({ selectedContent, slug, breadCrumb, reviewsAndRatings }: any) {
+export default function Content({ selectedContent, slug, breadCrumb }: any) {
   const [isExpanded, setIsExpanded] = useState(true);
-  const [galleryCategory, setGalleryCategory] = useState("hostels");
-  const [galleryPopup, setGalleryPopup] = useState(false);
   // const isMobile = useIsMobile(1030);
   // const toggleReadMore = () => {
   //   setIsExpanded((prev) => !prev);
   // };
-  // console.log(selectedContent, "  selected content")
+  console.log(selectedContent, "  selected selectedContent")
 
   return (
     <div className="w-full overflow-x-hidden md:[flex:8]">
@@ -73,12 +74,12 @@ export default function Content({ selectedContent, slug, breadCrumb, reviewsAndR
           };
           const videoGalleries = section?.videoGallery || [];
           const groupedVideos = groupVideosByCategory(videoGalleries)
-          console.log(Object.keys(groupedImages), "  section");
+          // console.log(section, "  section");
           // ==============================================
           return (
             <div
               key={index}
-              className="mt-5 w-full rounded-2xl bg-white p-5 md:min-w-[550px]"
+              className={`mt-5 w-full rounded-2xl p-5 md:min-w-[550px] ${section?.news ? "bg-transparent" : "bg-white"}`}
             >
 
               {/* Title */}
@@ -206,6 +207,9 @@ export default function Content({ selectedContent, slug, breadCrumb, reviewsAndR
                   dangerouslySetInnerHTML={{ __html: section?.facilityText }}
                 />
               )}
+              {/* news */}
+              {section?.news
+                && <NewsAndUpdatesSection data={section?.news} />}
               {/* newsText */}
               {section?.newsText && (
                 <div
@@ -296,98 +300,7 @@ export default function Content({ selectedContent, slug, breadCrumb, reviewsAndR
               {section?.accordion && <TimelineList data={section?.accordion} />}
               {/* Photo Gallery  */}
               {section?.imageGallery && (
-                <div className=" ">
-                  {galleryPopup && <ImageGalleryPopup images={groupedImages[galleryCategory]} onClose={() => setGalleryPopup(false)} />}
-                  <div className="flex justify-start items-center gap-5">
-                    {Object.keys(groupedImages).map((category, index) => {
-
-                      return (
-                        <h3
-                          onClick={() => setGalleryCategory(category)}
-                          className={`my-3 text-lg capitalize px-7 py-[7px] rounded-3xl hover:cursor-pointer hover:bg-orange-500  ${galleryCategory === category ? "bg-orange-500" : "bg-[#FF820E66]"}`}
-                        >
-                          {category}</h3>
-                      )
-                    })}
-                  </div>
-
-                  <div className="flex w-full items-center justify-center h-[251px] ">
-                    {Object.keys(groupedImages).map((category, index) => {
-                      console.log(groupedImages[galleryCategory])
-                      if (category === galleryCategory) {
-                        const len = groupedImages[category].length;
-                        return (
-                          <div className={`w-full mt-8 h-full grid grid-cols-4 grid-rows-2 justify-around gap-5 }`}>
-                            {groupedImages[category].slice(0, 5).map(
-                              (image: any, i: number) => {
-                                if (i === 0) {
-                                  return (
-                                    <div
-                                      onClick={() => setGalleryPopup(true)}
-                                      className="min-h-full min-w-[442px] bg-cover col-span-2 row-span-2 cursor-pointer"
-                                    >
-                                      <Image
-                                        key={i}
-                                        src={image?.url}
-                                        width={442}
-                                        height={300}
-                                        alt={`${category} image`}
-                                        className="h-full w-full flex-wrap rounded-lg object-cover"
-                                      />
-                                    </div>
-                                  )
-                                }
-                                if (i == len - 1 || i == 4) {
-                                  return (
-                                    <div
-                                      onClick={() => setGalleryPopup(true)}
-                                      className="bg-cover relative rounded-lg overflow-hidden"
-                                    >
-                                      <div
-                                        className="w-full h-full absolute bg-[#0000008C] top-0 left-0 flex justify-center items-center text-white hover:underline cursor-pointer"
-                                        onClick={() => {
-
-                                        }}
-                                      >
-                                        See more
-                                      </div>
-                                      <Image
-                                        key={i}
-                                        src={image?.url}
-                                        width={100}
-                                        height={100}
-                                        alt={`${category} image`}
-                                        className="h-full w-full flex-wrap  object-cover"
-                                      />
-                                    </div>
-                                  )
-                                }
-                                return (
-                                  <div
-                                    onClick={() => setGalleryPopup(true)}
-                                    className="cursor-pointer"
-                                  >
-                                    <Image
-                                      key={i}
-                                      src={image?.url}
-                                      width={100}
-                                      height={100}
-                                      alt={`${category} image`}
-                                      className="h-full w-full flex-wrap rounded-lg object-cover"
-                                    />
-                                  </div>
-                                )
-                              },
-                            )}
-                          </div>)
-                      }
-                      return
-                    }
-
-                    )}
-                  </div>
-
-                </div>
+                <ImageGallery groupedImages={groupedImages} selectedContent={section?.imageGallery} />
               )
               }
               {/* Video Gallery  */}
@@ -436,7 +349,7 @@ export default function Content({ selectedContent, slug, breadCrumb, reviewsAndR
               )}
               {/* Review  */}
               {section?.reviewsText && (
-                <ReviewsAndRatingsSection data={reviewsAndRatings} />
+                <ReviewsAndRatingsSection data={section?.reviewsText} />
               )}
               {/* Related Courses  */}
               {section?.courseText && (
@@ -451,6 +364,75 @@ export default function Content({ selectedContent, slug, breadCrumb, reviewsAndR
         })}
     </div >
   );
+}
+
+function NewsAndUpdatesSection({ data }: any) {
+  console.log(data)
+  const [searchValue, setSearchValue] = useState("")
+  const [newsData, setNewsData] = useState(data)
+
+  function filter(data: any, value: any) {
+    return data.filter((news: any) =>
+      news.attributes.title.toLowerCase().includes(value.toLowerCase())
+    )
+  }
+  useEffect(() => {
+    const handler = setTimeout(() => {
+
+      setNewsData(filter(data, searchValue))
+    }, 500);
+
+    return () => clearTimeout(handler);
+  }, [searchValue]);
+
+  return (
+    <div className="bg-transparent flex flex-col gap-5">
+      <div className="w-full">
+        {/* <TypeHeadSearchBar /> */}
+        <div className="w-full">
+          <input
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            type="text"
+            placeholder="Search for news"
+            className="w-full px-2 py-1"
+          />
+        </div>
+      </div>
+
+      <div className="gap-5 flex flex-col">
+        {newsData.map((news: any, idx: number) => {
+          const date = formatDate(news.attributes.updatedAt)
+          return (
+            <div className="w-full py-8 flex bg-white items-center justify-between gap-4  rounded-lg shadow-[1.490781307220459px_1.490781307220459px_2.981562614440918px_0px_rgba(0,0,0,0.25)] ">
+              <div className="bg-cover p-2 flex justify-center items-center ml-2 ">
+                <img className="min-w-[56.65px] h-[56.65px]" src={news.attributes.icon.data.attributes.url} alt="" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <h1 className="text-[#202020] text-lg font-semibold">{news.attributes.title}</h1>
+
+                <div>
+                  <div className="h-[14.16px] justify-start items-start gap-1.5 inline-flex">
+                    <IoIosCalendar className="w-[13.42px] h-[14.16px]" />
+                    <div className="text-[#ff8f28] text-[10.44px] ">{date}</div>
+                  </div>
+
+                  <div className="">
+                    <p className="text-black text-xs font-light">
+                      {news.attributes.excerpt.slice(0, 150)}...
+                      <span className="text-[#ff8f28] text-xs font-semibold underline cursor-pointer">Read more</span>
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
 }
 
 function ReviewsAndRatingsSection({ data }: any) {
