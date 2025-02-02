@@ -152,30 +152,38 @@ function RecentNews({ data }: any) {
 }
 
 function Card2({ item }: any) {
+  console.log("lets print icon",item);
   return (
     <div className="mb-4 flex items-center gap-5 border-b-2 border-orange-500 pb-3">
       <div className="flex flex-col gap-1">
         <Link
-          href={`news/${item?.id}|| #`}
+         href={item?.id ? `/news/${item?.id}` : `#`}
           className="cursor-pointer font-bold"
         >
-          <h6 className="cursor-pointer hover:text-orange-500">
+          <h6 className="line-clamp-2 cursor-pointer hover:text-orange-500 text-sm">
             {item?.title}
           </h6>
         </Link>
-        <div className="flex gap-5 text-xs capitalize text-orange-500">
-          <p className="flex items-center gap-2">
+        <div className="flex gap-3 text-xxs capitalize text-orange-500">
+          <p className="flex items-center gap-2 text-xs">
             <FaRegCalendarAlt className="text-black" />
             {formatDate(item?.timeStamp)}
           </p>
-          <p className="flex items-center gap-2">
+          <p className="flex items-center gap-2 text-xs">
             <BsClipboardCheck className="text-black" />
             {item?.category}
           </p>
         </div>
-        <p className="line-clamp-2 text-sm">{item?.text}</p>
+        <p className="line-clamp-2 text-xs">{item?.text}</p>
       </div>
-      <Image src={item?.icon?.url} alt="CD" width={100} height={100} />
+      <Image
+        src={item?.icon}
+        alt="AWC"
+        width={100}
+        height={100}
+        className="h-16 min-w-16 rounded-lg object-contain"
+      />
     </div>
+
   );
 }
