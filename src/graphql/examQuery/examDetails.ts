@@ -219,6 +219,12 @@ export const getExamDetails = gql`query getExamDetails($ID: ID!) {
               }
             }
             ... on ComponentCommonAccordionComponent {
+              id
+              title {
+                t1
+                t2
+                t3
+              }
               accordion {
                 title
                 text
