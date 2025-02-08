@@ -97,8 +97,53 @@ export const getExamDetails = gql`query getExamDetails($ID: ID!) {
           news {
             data {
               attributes {
-                title
+          icon {
+            data {
+              id
+              attributes {
+                url
               }
+            }
+          }
+          title
+          excerpt
+          category {
+            data {
+              id
+              attributes {
+                category
+              }
+            }
+          }
+          bgImage {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          author {
+            data {
+              id
+              attributes {
+                avatar {
+                  data {
+                    id
+                    attributes {
+                      url
+                    }
+                  }
+                }
+                name
+                designation
+              }
+            }
+          }
+          slug
+          newsSequence
+          updatedAt
+        }
             }
           }
           navbars {

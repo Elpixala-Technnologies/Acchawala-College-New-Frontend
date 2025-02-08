@@ -44,6 +44,7 @@ export default function CourseDetailPage({ params }: Props) {
   } = useQuery(getCourseDetails, {
     variables: { ID: courseId },
   });
+  // console.log(courseData, " courseDataLoading")
 
   const {
     loading: topCourseLoading,
@@ -57,6 +58,8 @@ export default function CourseDetailPage({ params }: Props) {
     },
   });
 
+  // console.log(topCourseData, " topCourseData")
+
   const {
     data: latestNewsData,
     loading: latestNewsDataLoading,
@@ -68,6 +71,7 @@ export default function CourseDetailPage({ params }: Props) {
       pageSize: 3,
     },
   });
+  console.log(courseData, "  course-data")
   // ========================================================= //
   useEffect(() => {
     // console.log(
@@ -79,6 +83,7 @@ export default function CourseDetailPage({ params }: Props) {
         courseData?.course?.data?.attributes?.PageData,
       );
       setTabSelectionArray(convertedData);
+      console.log(tabSelectionArray, convertedData)
     }
   }, [courseData]);
   // ==================================================== //
@@ -107,6 +112,8 @@ export default function CourseDetailPage({ params }: Props) {
     }
   }, [latestNewsData, latestNewsDataRefetch, latestNewsDataLoading]);
   // =========================================================== //
+  // console.log(tabSelectionArray)
+
   const asideSection = [
     {
       topCourses: topCourseData?.courses?.data?.map((item: any) => {

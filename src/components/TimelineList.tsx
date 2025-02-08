@@ -14,11 +14,10 @@ export default function TimelineList({ data }: any) {
         {data?.map((item: any, index: number) => (
           <div
             key={index}
-            className={` ${
-              isOpen === index || (index === 0 && isOpen === null)
-                ? "chat-bubble-active shadow-lg"
-                : "chat-bubble"
-            } relative rounded-lg border border-zinc-500 p-5 pb-4`}
+            className={` ${isOpen === index || (index === 0 && isOpen === null)
+              ? "chat-bubble-active shadow-lg"
+              : "chat-bubble"
+              } relative rounded-lg border border-zinc-500 p-5 pb-4`}
           >
             <button
               onClick={() => toggle(index)}
@@ -28,23 +27,21 @@ export default function TimelineList({ data }: any) {
                 {item?.title}
               </span>
               <IoIosArrowDown
-                className={`flex-center transform rounded-full bg-orange-500 p-1 text-2xl text-zinc-600 transition-transform ${
-                  isOpen === index || (index === 0 && isOpen === null)
-                    ? "rotate-180"
-                    : ""
-                }`}
+                className={`flex-center transform rounded-full bg-orange-500 p-1 text-2xl text-zinc-600 transition-transform ${isOpen === index || (index === 0 && isOpen === null)
+                  ? "rotate-180"
+                  : ""
+                  }`}
               />
             </button>
             <div
-              className={`mt-1 transition-all duration-300 ease-in-out ${
-                isOpen === index || (index === 0 && isOpen === null)
-                  ? "max-h-96"
-                  : "max-h-0 overflow-hidden"
-              }`}
+              className={`mt-1 transition-all duration-300 ease-in-out ${isOpen === index || (index === 0 && isOpen === null)
+                ? "max-h-96"
+                : "max-h-0 overflow-hidden"
+                }`}
             >
               {item?.text && (
                 <div
-                  className="dangerouslySetInnerHTMLStyle text-justify"
+                  className="dangerouslySetInnerHTMLStyle text-justify "
                   dangerouslySetInnerHTML={{ __html: item?.text }}
                 />
               )}

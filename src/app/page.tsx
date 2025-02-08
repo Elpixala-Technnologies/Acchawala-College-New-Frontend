@@ -92,13 +92,12 @@ export default function Home() {
     },
   });
   // ================================================================== //
-  useEffect(() => 
-    {
+  useEffect(() => {
     if (!homePageLoading && !homePageData1) {
       refetch();
     }
-  }, 
-  [homePageData1, refetch, homePageLoading]);
+  },
+    [homePageData1, refetch, homePageLoading]);
   useEffect(() => {
     if (!homePageLoading2 && !homePageData2) {
       homePageRefetch2();
@@ -760,9 +759,8 @@ function PackageContentCard({ data }: any) {
   const isMobile = useIsMobile(750);
   return (
     <div
-      className={`relative w-full rounded-xl p-5 pt-6 shadow duration-300 hover:scale-105 sm:w-[27%] md:pb-20 ${
-        data?.isPopular ? "bg-orange-500 text-white" : "bg-white text-black"
-      }`}
+      className={`relative w-full rounded-xl p-5 pt-6 shadow duration-300 hover:scale-105 sm:w-[27%] md:pb-20 ${data?.isPopular ? "bg-orange-500 text-white" : "bg-white text-black"
+        }`}
     >
       <p className="mb-2">{data?.PackageName}</p>
       <h3 className="text-4xl font-bold">

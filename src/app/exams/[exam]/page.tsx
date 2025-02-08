@@ -42,6 +42,7 @@ export default function ExamDetailsPage({ params }: Props) {
   } = useQuery(getExamDetails, {
     variables: { ID: examId },
   });
+  console.log(examData)
 
   const {
     loading: topCourseLoading,
@@ -73,14 +74,28 @@ export default function ExamDetailsPage({ params }: Props) {
     //   examData?.exam?.data?.attributes?.brochureFile?.data,
     // );
 
-    if (examData?.exam?.data?.attributes?.PageData) {
-      const convertedData: any = convertQueryDataToTabSections(
+    // if (examData?.exam?.data?.attributes?.PageData) {
+    //   const convertedData: any = convertQueryDataToTabSections(
+    //     examData?.exam?.data?.attributes?.PageData,
+    //   );
+    //   console.log(convertedData, " converted data")
+    //   setTabSelectionArray(convertedData);
+    // }
+    if (examData?.exam?.data?.attributes?.PageData || examData?.exam?.data?.attributes?.news) {
+      const convertedPageData: any = convertQueryDataToTabSections(
         examData?.exam?.data?.attributes?.PageData,
       );
-      setTabSelectionArray(convertedData);
+      if (examData?.exam?.data?.attributes?.news.data) {
+        const sections = [{ news: examData?.exam?.data?.attributes?.news.data }]
+
+        convertedPageData.push({ navItem: "News and Updates", sections: sections });
+      }
+
+      console.log(convertedPageData, " converted data")
+      setTabSelectionArray(convertedPageData);
     }
   }, [examData]);
-
+  // console.log(tabSelectionArray, " tabSectionArray")
   // ======================================================================= //
   useEffect(() => {
     if (!examDetailsBannerLoading && !examDetailsBanner) {
@@ -169,6 +184,7 @@ export default function ExamDetailsPage({ params }: Props) {
           description={examData?.exam?.data?.attributes?.description}
           updatedAt={examData?.exam?.data?.attributes?.updatedAt}
           tabUrlValue={"exams"}
+        // examNews={examData?.exam?.data?.attributes?.news}
         />
       ) : (
         <PageTabsWithDetailSkeleton />
