@@ -20,6 +20,7 @@ import ImageGalleryPopup from "./ImageGallery";
 import { IoIosCalendar } from "react-icons/io";
 import TypeHeadSearchBar from "../TypeHeadSearchBar/TypeHeadSearchBar";
 import ImageGallery from "./ImageGallery";
+import { FaRegNewspaper } from "react-icons/fa6";
 
 export default function Content({ selectedContent, slug, breadCrumb }: any) {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -27,7 +28,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
   // const toggleReadMore = () => {
   //   setIsExpanded((prev) => !prev);
   // };
-  console.log(selectedContent, "  selected selectedContent")
+  // console.log(selectedContent, "  selected selectedContent")
 
   return (
     <div className="w-full overflow-x-hidden md:[flex:8]">
@@ -74,7 +75,6 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
           };
           const videoGalleries = section?.videoGallery || [];
           const groupedVideos = groupVideosByCategory(videoGalleries)
-          // console.log(section, "  section");
           // ==============================================
           return (
             <div
@@ -207,9 +207,6 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
                   dangerouslySetInnerHTML={{ __html: section?.facilityText }}
                 />
               )}
-              {/* news */}
-              {section?.news
-                && <NewsAndUpdatesSection data={section?.news} />}
               {/* newsText */}
               {section?.newsText && (
                 <div
@@ -217,6 +214,9 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
                   dangerouslySetInnerHTML={{ __html: section?.newsText }}
                 />
               )}
+              {/* news */}
+              {section?.news
+                && <NewsAndUpdatesSection data={section?.news} />}
               {/* Buttons */}
               {section?.button && (
                 <div className="mb-5 flex gap-2 max-sm:flex-col">
@@ -367,7 +367,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
 }
 
 function NewsAndUpdatesSection({ data }: any) {
-  console.log(data)
+  console.log(data, "  data")
   const [searchValue, setSearchValue] = useState("")
   const [newsData, setNewsData] = useState(data)
 
@@ -387,17 +387,20 @@ function NewsAndUpdatesSection({ data }: any) {
 
   return (
     <div className="bg-transparent flex flex-col gap-5">
-      <div className="w-full">
-        {/* <TypeHeadSearchBar /> */}
-        <div className="w-full">
+      <div className="w-full bg-white px-2 rounded-lg">
+
+        <div className="w-full flex gap-3 items-center py-2">
+          <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" className="text-orange-500" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
+
           <input
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             type="text"
             placeholder="Search for news"
-            className="w-full px-2 py-1"
+            className="w-full px-2 py-1 outline-none"
           />
         </div>
+
       </div>
 
       <div className="gap-5 flex flex-col">
@@ -412,15 +415,20 @@ function NewsAndUpdatesSection({ data }: any) {
                 <h1 className="text-[#202020] text-lg font-semibold">{news.attributes.title}</h1>
 
                 <div>
-                  <div className="h-[14.16px] justify-start items-start gap-1.5 inline-flex">
-                    <IoIosCalendar className="w-[13.42px] h-[14.16px]" />
-                    <div className="text-[#ff8f28] text-[10.44px] ">{date}</div>
+                  <div className="flex items-center gap-4 justify-start">
+                    <div className="h-[14.16px] justify-start items-start gap-1.5 inline-flex">
+                      <IoIosCalendar className="w-[13.42px] h-[14.16px]" />
+                      <div className="text-[#ff8f28] text-[10.44px] ">{date}</div>
+                    </div>
+                    <div className="h-[14.16px] justify-start items-start gap-1.5 inline-flex">
+                      <FaRegNewspaper className="w-[13.42px] h-[14.16px]" />
+                      <div className="text-[#ff8f28] text-[10.44px] ">{news.attributes.category.data.attributes.category}</div>
+                    </div>
                   </div>
-
                   <div className="">
-                    <p className="text-black text-xs font-light">
-                      {news.attributes.excerpt.slice(0, 150)}...
-                      <span className="text-[#ff8f28] text-xs font-semibold underline cursor-pointer">Read more</span>
+                    <p className="text-black text-sm font-light">
+                      {news.attributes.excerpt.slice(0, 250)}...
+                      <Link href={"#"} className="text-[#ff8f28] text-sm font-semibold underline cursor-pointer">Read more</Link>
                     </p>
                   </div>
                 </div>
