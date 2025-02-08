@@ -80,22 +80,34 @@ export function convertQueryDataToTabSections(queryData: any,newsData: any,bread
                     },
                 };
                 
-
+                // if text editor in news has content then only add it
                 if(item.newsText!="")
                 {
                     // Add the section data to the respective navItem's sections array
                     tabSectionsMap[navItem].sections.push(sectionData);
 
                 }
+                // else give its title to newsSectionData
                 else
                 {
                     // We will replace the heading of common news component
                     newsSectionData.title=sectionData.title;
                 }
-                // make a new section for news data
 
+
+                // make a new section for news data
                 tabSectionsMap[navItem].sections.push(newsSectionData);
 
+              }
+              // if there are no news   
+              else
+              {
+                if(item.newsText!="")
+                    {
+                        // if text editor in news has content then only add it
+                        tabSectionsMap[navItem].sections.push(sectionData);
+    
+                    }
               }
         }
         // else proceed normally
