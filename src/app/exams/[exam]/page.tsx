@@ -42,7 +42,7 @@ export default function ExamDetailsPage({ params }: Props) {
   } = useQuery(getExamDetails, {
     variables: { ID: examId },
   });
-  console.log(examData)
+  // console.log(examData)
 
   const {
     loading: topCourseLoading,
@@ -82,16 +82,13 @@ export default function ExamDetailsPage({ params }: Props) {
     //   setTabSelectionArray(convertedData);
     // }
     if (examData?.exam?.data?.attributes?.PageData || examData?.exam?.data?.attributes?.news) {
+      console.log("breadcrumb is:",examData?.exam?.data?.attributes?.breadCrumb);
       const convertedPageData: any = convertQueryDataToTabSections(
-        examData?.exam?.data?.attributes?.PageData,
+        examData?.exam?.data?.attributes?.PageData, 
+        examData?.exam?.data?.attributes?.news,
+        examData?.exam?.data?.attributes?.breadCrumb
       );
-      if (examData?.exam?.data?.attributes?.news.data) {
-        const sections = [{ news: examData?.exam?.data?.attributes?.news.data }]
-
-        convertedPageData.push({ navItem: "News and Updates", sections: sections });
-      }
-
-      console.log(convertedPageData, " converted data")
+      console.log("The converted page data is: ",convertedPageData);
       setTabSelectionArray(convertedPageData);
     }
   }, [examData]);

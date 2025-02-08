@@ -50,6 +50,7 @@ export const getExamDetails = gql`query getExamDetails($ID: ID!) {
             }
           }
           examName
+          breadCrumb
           streams {
             data {
               attributes {

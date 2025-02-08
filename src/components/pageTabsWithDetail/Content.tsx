@@ -75,16 +75,17 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
           };
           const videoGalleries = section?.videoGallery || [];
           const groupedVideos = groupVideosByCategory(videoGalleries)
+          // console.log("each section is:",section);
           // ==============================================
           return (
             <div
               key={index}
-              className={`mt-5 w-full rounded-2xl p-5 md:min-w-[550px] ${section?.news ? "bg-transparent" : "bg-white"}`}
+              className={`mt-5 w-full rounded-2xl  md:min-w-[550px] ${section?.news ? "bg-transparent" : "bg-white p-5"}`}
             >
 
               {/* Title */}
               {section?.title && (
-                <h2 className="mb-4 border-b border-zinc-500 pb-4 text-2xl font-bold capitalize">
+                <h2 className= {`text-2xl font-bold capitalize ${section?.news ? "mb-3" : "border-b border-zinc-500 mb-4 pb-4"}`}>
                   {section?.title?.t1 && (
                     <span className="text-black">{section?.title?.t1}</span>
                   )}{" "}
@@ -367,7 +368,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
 }
 
 function NewsAndUpdatesSection({ data }: any) {
-  console.log(data, "  data")
+  // console.log(data, "  data")
   const [searchValue, setSearchValue] = useState("")
   const [newsData, setNewsData] = useState(data)
 
@@ -444,7 +445,7 @@ function NewsAndUpdatesSection({ data }: any) {
 }
 
 function ReviewsAndRatingsSection({ data }: any) {
-  console.log(data, "  reviews data")
+  // console.log(data, "  reviews data")
   const [averageRatings, setAverageRatings] = useState<any>({
     DifficultyLevel: 0,
     ExamPattern: 0,
@@ -477,7 +478,7 @@ function ReviewsAndRatingsSection({ data }: any) {
 
   useEffect(() => {
     categoryAverageRating(data, averageRatings)
-    console.log(averageRatings)
+    // console.log(averageRatings)
   }, [data])
 
   function calculateOverAllRating(data: any) {

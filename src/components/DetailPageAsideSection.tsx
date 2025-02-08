@@ -152,7 +152,6 @@ function RecentNews({ data }: any) {
 }
 
 function Card2({ item }: any) {
-  console.log("lets print icon",item);
   return (
     <div className="mb-4 flex items-center gap-5 border-b-2 border-orange-500 pb-3">
       <div className="flex flex-col gap-1">
