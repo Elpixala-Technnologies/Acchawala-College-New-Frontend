@@ -3,7 +3,7 @@ import { CiStar } from "react-icons/ci";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 
 export const StarRating = ({
-  rating = 3.5,
+  rating = 5,
   totalStars = 5,
   className,
 }: any) => {

@@ -635,34 +635,6 @@ export const getCollegeDetails = gql`
               }
             }
           }
-
-          CollegeReviewsAndRatings {
-            id
-            overall {
-              id
-              description
-            }
-            Academics {
-              rating
-              description
-            }
-            Faculty {
-              rating
-              description
-            }
-            Infrastructure {
-              rating
-              description
-            }
-            SocialLife {
-              rating
-              description
-            }
-            Placement {
-              rating
-              description
-            }
-          }
           author {
             data {
               id

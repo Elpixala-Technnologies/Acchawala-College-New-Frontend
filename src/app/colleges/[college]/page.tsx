@@ -53,6 +53,8 @@ export default function CollegeDetailPage({ params }: Props) {
     if (collegeData?.college?.data?.attributes?.PageData) {
       const convertedData = convertQueryDataToTabSections(
         collegeData?.college?.data?.attributes?.PageData,
+        collegeData?.college?.data?.attributes?.news,
+        collegeData?.college?.data?.attributes?.breadCrumb
       );
       setTabSelectionArray(convertedData);
     }

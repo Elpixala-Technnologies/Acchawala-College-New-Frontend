@@ -45,12 +45,12 @@ export function getDate(dateString: string) {
     return (`${day}-${month}-${year}`);
 }
 
-export function convertQueryDataToTabSections(queryData: any): any {
+export function convertQueryDataToTabSections(queryData: any,newsData: any,breadCrumb: any): any {
     const tabSectionsMap: { [key: string]: any } = {};
-
     // Iterate over each item in queryData
     queryData.forEach((item: any) => {
         const navItem = item?.navItem?.data?.attributes?.navItem;
+
         if (!navItem) {
             // Skip this item if it doesn't contain navItem
             return;
@@ -63,8 +63,58 @@ export function convertQueryDataToTabSections(queryData: any): any {
             tabSectionsMap[navItem] = { navItem: navItem, sections: [] };
         }
 
-        // Add the section data to the respective navItem's sections array
-        tabSectionsMap[navItem].sections.push(sectionData);
+        // add news data as a new section if it is of type news
+        if (item.__typename === "ComponentCommonNewsComponent") {
+
+            // if there are news related to the article
+            if (Array.isArray(newsData?.data) && newsData.data.length > 0) {
+          
+                // assign news data to the newsSectionData
+                const newsSectionData = {
+                    news: newsData.data,
+                    title: {
+                      __typename: "ComponentCommonTitle",
+                      t1: "Latest",
+                      t2: breadCrumb,
+                      t3: "News & Updates",
+                    },
+                };
+                
+                // if text editor in news has content then only add it
+                if(item.newsText!="")
+                {
+                    // Add the section data to the respective navItem's sections array
+                    tabSectionsMap[navItem].sections.push(sectionData);
+
+                }
+                // else give its title to newsSectionData
+                else
+                {
+                    // We will replace the heading of common news component
+                    newsSectionData.title=sectionData.title;
+                }
+
+
+                // make a new section for news data
+                tabSectionsMap[navItem].sections.push(newsSectionData);
+
+              }
+              // if there are no news   
+              else
+              {
+                if(item.newsText!="")
+                    {
+                        // if text editor in news has content then only add it
+                        tabSectionsMap[navItem].sections.push(sectionData);
+    
+                    }
+              }
+        }
+        // else proceed normally
+        else{
+                // Add the section data to the respective navItem's sections array
+                tabSectionsMap[navItem].sections.push(sectionData);
+        }
     });
 
     // Convert the map to an array

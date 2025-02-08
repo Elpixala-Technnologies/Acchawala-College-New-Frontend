@@ -17,6 +17,7 @@ export function PageTabsWithDetailWrapperContent({
   author,
   description,
   updatedAt,
+  // examNews,
 }: any) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
@@ -61,6 +62,7 @@ export function PageTabsWithDetailWrapperContent({
           selectedContent={data?.[selectedIndex]}
           slug={slug}
           breadCrumb={breadCrumb}
+        // examNews={examNews}
         />
         <DetailPageAsideSection data={asideData} />
       </main>
@@ -127,6 +129,7 @@ export default function PageTabsWithDetail({
   author,
   description,
   updatedAt,
+  // examNews,
 }: any) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -139,6 +142,7 @@ export default function PageTabsWithDetail({
         slug={slug}
         tabUrlValue={tabUrlValue}
         breadCrumb={breadCrumb}
+      // examNews={examNews}
       />
     </Suspense>
   );

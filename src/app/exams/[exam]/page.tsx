@@ -42,6 +42,7 @@ export default function ExamDetailsPage({ params }: Props) {
   } = useQuery(getExamDetails, {
     variables: { ID: examId },
   });
+  // console.log(examData)
 
   const {
     loading: topCourseLoading,
@@ -73,14 +74,25 @@ export default function ExamDetailsPage({ params }: Props) {
     //   examData?.exam?.data?.attributes?.brochureFile?.data,
     // );
 
-    if (examData?.exam?.data?.attributes?.PageData) {
-      const convertedData: any = convertQueryDataToTabSections(
-        examData?.exam?.data?.attributes?.PageData,
+    // if (examData?.exam?.data?.attributes?.PageData) {
+    //   const convertedData: any = convertQueryDataToTabSections(
+    //     examData?.exam?.data?.attributes?.PageData,
+    //   );
+    //   console.log(convertedData, " converted data")
+    //   setTabSelectionArray(convertedData);
+    // }
+    if (examData?.exam?.data?.attributes?.PageData || examData?.exam?.data?.attributes?.news) {
+      console.log("breadcrumb is:",examData?.exam?.data?.attributes?.breadCrumb);
+      const convertedPageData: any = convertQueryDataToTabSections(
+        examData?.exam?.data?.attributes?.PageData, 
+        examData?.exam?.data?.attributes?.news,
+        examData?.exam?.data?.attributes?.breadCrumb
       );
-      setTabSelectionArray(convertedData);
+      console.log("The converted page data is: ",convertedPageData);
+      setTabSelectionArray(convertedPageData);
     }
   }, [examData]);
-
+  // console.log(tabSelectionArray, " tabSectionArray")
   // ======================================================================= //
   useEffect(() => {
     if (!examDetailsBannerLoading && !examDetailsBanner) {
@@ -169,6 +181,7 @@ export default function ExamDetailsPage({ params }: Props) {
           description={examData?.exam?.data?.attributes?.description}
           updatedAt={examData?.exam?.data?.attributes?.updatedAt}
           tabUrlValue={"exams"}
+        // examNews={examData?.exam?.data?.attributes?.news}
         />
       ) : (
         <PageTabsWithDetailSkeleton />

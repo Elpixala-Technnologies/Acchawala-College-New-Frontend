@@ -213,7 +213,7 @@ function Card2({ item }: any) {
       </div>
       <Image
         src={item?.icon}
-        alt="CD"
+        alt="AWC"
         width={100}
         height={100}
         className="h-28 min-w-28 rounded-lg object-contain"
