@@ -81,6 +81,8 @@ export default function CourseDetailPage({ params }: Props) {
     if (courseData?.course?.data?.attributes?.PageData) {
       const convertedData: any = convertQueryDataToTabSections(
         courseData?.course?.data?.attributes?.PageData,
+        courseData?.course?.data?.attributes?.news,
+        courseData?.course?.data?.attributes?.breadCrumb
       );
       setTabSelectionArray(convertedData);
       console.log(tabSelectionArray, convertedData)
