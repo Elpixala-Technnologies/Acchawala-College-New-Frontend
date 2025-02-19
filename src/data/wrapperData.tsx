@@ -32,7 +32,7 @@ export const header = {
     {
       id: 4,
       label: "Latest News",
-      href: "/news",
+      href: "https://news.acchawalacollege.com/",
       subNav: [],
     },
   ],
