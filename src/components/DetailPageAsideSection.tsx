@@ -156,7 +156,7 @@ function Card2({ item }: any) {
     <div className="mb-4 flex items-center gap-5 border-b-2 border-orange-500 pb-3">
       <div className="flex flex-col gap-1">
         <Link
-          href={item?.id ? `https://acchawalacollege-news-ubtq2.ondigitalocean.app/news/${item?.id}` : `#`}
+          href={item?.id ? `https://news.acchawalacollege.com/news/${item?.id}` : `#`}
           className="cursor-pointer font-bold"
           target="_blank"
         >
