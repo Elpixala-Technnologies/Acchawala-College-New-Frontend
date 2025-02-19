@@ -32,7 +32,7 @@ export const header = {
     {
       id: 4,
       label: "Latest News",
-      href: "https://acchawalacollege-news-ubtq2.ondigitalocean.app/",
+      href: "https://news.acchawalacollege.com/",
       subNav: [],
     },
   ],
