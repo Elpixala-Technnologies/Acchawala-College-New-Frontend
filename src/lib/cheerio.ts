@@ -33,7 +33,7 @@ export const extractHeadings = (html: string) => {
     return { updatedHtml: $.html(), headings };
 };
 
-export function extractKeyValueULs(htmlString: string | AnyNode | AnyNode[] | Buffer<ArrayBufferLike>) {
+export function extractKeyValueULs(htmlString: string | AnyNode | AnyNode[]) {
     // Load the HTML using Cheerio
     const $ = cheerio.load(htmlString);
 
@@ -70,7 +70,7 @@ export function extractKeyValueULs(htmlString: string | AnyNode | AnyNode[] | Bu
 }
 
 export function parseHtmlToJson5(
-    htmlString: string | AnyNode | AnyNode[] | Buffer<ArrayBufferLike>
+    htmlString: string | AnyNode | AnyNode[]
 ) {
     const $ = cheerio.load(htmlString);
 
@@ -136,75 +136,52 @@ export function parseHtmlToJson5(
 
     return result;
 }
-export function parseHtmlToJson6(
-    htmlString: string | AnyNode | AnyNode[] | Buffer<ArrayBufferLike>
-) {
-    const $ = cheerio.load(htmlString);
+
+export function parseHtmlToJson6(htmlString: string | AnyNode | AnyNode[]): any[] {
+    if (!htmlString) {
+        console.error("parseHtmlToJson6: Invalid input", htmlString);
+        return [];
+    }
+
+    const $ = cheerio.load(htmlString.toString());
 
     function traverse(element: any) {
-        let tagName = String(element.tagName).toLowerCase();
+        let tagName = element.tagName ? String(element.tagName).toLowerCase() : "";
         let children: any[] = [];
 
-        // Handle text nodes
         if (element.type === "text") {
             return element.data.trim() ? element.data.trim() : null;
         }
 
-        // Extract <p>, <h1>, <h2>, <h3> as key-value pairs
         if (["p", "h1", "h2", "h3"].includes(tagName)) {
-            return { [tagName]: $(element).html().trim() };
+            const htmlContent = $(element).html();
+            return htmlContent ? { [tagName]: htmlContent.trim() } : null;
         }
 
-        // Handle <li> with two <span> elements inside
         if (tagName === "li") {
             let spans = $(element).find("span");
-
             if (spans.length >= 2) {
-                let title = $(spans[0]).text().trim(); // First <span> text
-                let text = $(spans[1]).text().trim(); // Second <span> text
-                return { title, text };
+                return { title: $(spans[0]).text().trim(), text: $(spans[1]).text().trim() };
             }
         }
 
-        // Extract <table> as-is
-        if (tagName === "table") {
-            return { table: $.html(element) };
-        }
+        if (tagName === "table") return { table: $.html(element) };
+        if (tagName === "img") return { image: $.html(element) };
+        if (tagName === "a") return { link: $.html(element) };
 
-        // Extract <img> as-is
-        if (tagName === "img") {
-            return { image: $.html(element) };
-        }
+        $(element).contents().each((_, child) => {
+            let childData = traverse(child);
+            if (childData) children.push(childData);
+        });
 
-        // Extract <a> as-is
-        if (tagName === "a") {
-            return { link: $.html(element) };
-        }
-
-        // Process child elements
-        $(element)
-            .contents()
-            .each((_, child) => {
-                let childData = traverse(child);
-                if (childData) {
-                    children.push(childData);
-                }
-            });
-
-        // Return structured object
-        return children.length > 0
-            ? { [tagName]: children.length === 1 ? children[0] : children }
-            : null;
+        return children.length ? { [tagName]: children.length === 1 ? children[0] : children } : null;
     }
 
-    // Process body content (excluding <html> and <body> tags)
     let result: any[] = [];
-    $("body")
-        .children()
-        .each((_, elem) => {
-            let parsed = traverse(elem);
-            if (parsed) result.push(parsed);
-        });
+    $("body").children().each((_, elem) => {
+        let parsed = traverse(elem);
+        if (parsed) result.push(parsed);
+    });
 
     return result;
 }
