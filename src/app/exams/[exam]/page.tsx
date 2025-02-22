@@ -82,13 +82,13 @@ export default function ExamDetailsPage({ params }: Props) {
     //   setTabSelectionArray(convertedData);
     // }
     if (examData?.exam?.data?.attributes?.PageData || examData?.exam?.data?.attributes?.news) {
-      console.log("breadcrumb is:",examData?.exam?.data?.attributes?.breadCrumb);
+      console.log("breadcrumb is:", examData?.exam?.data?.attributes?.breadCrumb);
       const convertedPageData: any = convertQueryDataToTabSections(
-        examData?.exam?.data?.attributes?.PageData, 
+        examData?.exam?.data?.attributes?.PageData,
         examData?.exam?.data?.attributes?.news,
         examData?.exam?.data?.attributes?.breadCrumb
       );
-      console.log("The converted page data is: ",convertedPageData);
+      console.log(convertedPageData, "     *************************The converted page data is: ");
       setTabSelectionArray(convertedPageData);
     }
   }, [examData]);

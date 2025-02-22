@@ -21,6 +21,8 @@ import { IoIosCalendar } from "react-icons/io";
 import TypeHeadSearchBar from "../TypeHeadSearchBar/TypeHeadSearchBar";
 import ImageGallery from "./ImageGallery";
 import { FaRegNewspaper } from "react-icons/fa6";
+import { parseHtmlToJson5, parseHtmlToJson6 } from "@/lib/cheerio";
+import ParsedHtmlContent from "./parsedHtmlContent";
 
 export default function Content({ selectedContent, slug, breadCrumb }: any) {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -28,13 +30,18 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
   // const toggleReadMore = () => {
   //   setIsExpanded((prev) => !prev);
   // };
-  // console.log(selectedContent, "  selected selectedContent")
+  console.log(selectedContent, "  selected selectedContent")
 
   return (
     <div className="w-full overflow-x-hidden md:[flex:8]">
       {selectedContent &&
         selectedContent?.sections?.length > 0 &&
         selectedContent?.sections?.map((section: any, index: any) => {
+          let textEditorParsedHtml: any[] = []
+          if (section?.editorText) {
+            // textEditorParsedHtml = parseHtmlToJson5(section?.editorText)
+          }
+          // console.log(section, " textEditorParsedHtml textEditorParsedHtml textEditorParsedHtml")
           // const articleLength = section?.article?.length || 0;
           const groupedImagesByCategory = (imageGalleries: any) => {
             const groupedImages: any = {};
@@ -75,7 +82,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
           };
           const videoGalleries = section?.videoGallery || [];
           const groupedVideos = groupVideosByCategory(videoGalleries)
-          // console.log("each section is:",section);
+          console.log("each section is:", section);
           // ==============================================
           return (
             <div
@@ -85,7 +92,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
 
               {/* Title */}
               {section?.title && (
-                <h2 className= {`text-2xl font-bold capitalize ${section?.news ? "mb-3" : "border-b border-zinc-500 mb-4 pb-4"}`}>
+                <h2 className={`text-2xl font-bold capitalize ${section?.news ? "mb-3" : "border-b border-zinc-500 mb-4 pb-4"}`}>
                   {section?.title?.t1 && (
                     <span className="text-black">{section?.title?.t1}</span>
                   )}{" "}
@@ -150,12 +157,16 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
                 </>
               )}
               {/* EditorText */}
-              {section?.editorText && (
+              {section?.editorText &&
                 <>
-                  <div
+
+                  {/* <div
                     className={`dangerouslySetInnerHTMLStyle mb-5 text-justify ${isExpanded ? "" : "line-clamp-4"}`}
                     dangerouslySetInnerHTML={{ __html: section?.editorText }}
-                  />
+                  /> */}
+                  <div>
+                    <ParsedHtmlContent data={section?.editorText} />
+                  </div>
                   {/* {(articleLength > 665 || isMobile) && (
                     <button
                       onClick={toggleReadMore}
@@ -165,7 +176,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
                     </button>
                   )} */}
                 </>
-              )}
+              }
               {/* ReviewsText */}
               {section?.reviewsText && (
                 <div
@@ -298,7 +309,8 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
                 </div>
               )}
               {/* Accordion  */}
-              {section?.accordion && <TimelineList data={section?.accordion} />}
+              {section?.accordion &&
+                <TimelineList data={section?.accordion} />}
               {/* Photo Gallery  */}
               {section?.imageGallery && (
                 <ImageGallery groupedImages={groupedImages} selectedContent={section?.imageGallery} />
