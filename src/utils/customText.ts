@@ -1,3 +1,5 @@
+import { parseHtmlToJson6 } from "@/lib/cheerio";
+
 export function addCommas(number: any) {
     // Convert the number to a string and use a regular expression to add commas
     return number?.toString()?.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -45,9 +47,10 @@ export function getDate(dateString: string) {
     return (`${day}-${month}-${year}`);
 }
 
-export function convertQueryDataToTabSections(queryData: any,newsData: any,breadCrumb: any): any {
+export function convertQueryDataToTabSections(queryData: any, newsData: any, breadCrumb: any): any {
     const tabSectionsMap: { [key: string]: any } = {};
     // Iterate over each item in queryData
+    // console.log(queryData, " newsData newsData")
     queryData.forEach((item: any) => {
         const navItem = item?.navItem?.data?.attributes?.navItem;
 
@@ -68,40 +71,52 @@ export function convertQueryDataToTabSections(queryData: any,newsData: any,bread
 
             // if there are news related to the article
             if (Array.isArray(newsData?.data) && newsData.data.length > 0) {
-          
+
                 // assign news data to the newsSectionData
                 const newsSectionData = {
                     news: newsData.data,
                     title: {
-                      __typename: "ComponentCommonTitle",
-                      t1: "Latest",
-                      t2: breadCrumb,
-                      t3: "News & Updates",
+                        __typename: "ComponentCommonTitle",
+                        t1: "Latest",
+                        t2: breadCrumb,
+                        t3: "News & Updates",
                     },
                 };
-                
 
-                if(item.newsText!="")
-                {
+
+                if (item.newsText != "") {
                     // Add the section data to the respective navItem's sections array
                     tabSectionsMap[navItem].sections.push(sectionData);
 
                 }
-                else
-                {
+                else {
                     // We will replace the heading of common news component
-                    newsSectionData.title=sectionData.title;
+                    newsSectionData.title = sectionData.title;
                 }
                 // make a new section for news data
 
                 tabSectionsMap[navItem].sections.push(newsSectionData);
 
-              }
+            }
+        }
+        else if (item.__typename === "ComponentCommonTextEditor") {
+
+            // assign news data to the newsSectionData
+            let textEditorData = {
+                editorText: [{}],
+                title: item?.title
+            };
+
+            const newEditorText = parseHtmlToJson6(item?.editorText);
+
+            textEditorData.editorText = newEditorText;
+
+            tabSectionsMap[navItem].sections.push(textEditorData);
         }
         // else proceed normally
-        else{
-                // Add the section data to the respective navItem's sections array
-                tabSectionsMap[navItem].sections.push(sectionData);
+        else {
+
+            tabSectionsMap[navItem].sections.push(sectionData);
         }
     });
 
