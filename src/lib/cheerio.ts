@@ -185,3 +185,11 @@ export function parseHtmlToJson6(htmlString: string | AnyNode | AnyNode[]): any[
 
     return result;
 }
+
+export function getTextLengthByTag(htmlString: string, tag: string): number {
+    if (!htmlString || !tag) return 0; // Handle empty input
+
+    const $ = cheerio.load(htmlString);
+    let textContent = $(tag).text().replace(/\s+/g, " ").trim(); // Extract and clean text
+    return textContent.length;
+}

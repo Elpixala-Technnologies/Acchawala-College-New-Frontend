@@ -534,49 +534,121 @@ table th:first-child {
 
 
 
-.styled-content h1 {
-  @apply sm:text-2xl text-xl text-black my-1 font-bold py-1 px-2 border-l-2 border-orange-500;
+@layer utilities {
+  /* Define custom classes with !important */
+  .important-p-0{
+    @apply p-0 !important
+  }
+  .important-mx-0{
+    @apply mx-0 !important
+  }
+  .important-mb-0{
+    @apply mb-0 !important
+  }
+  .important-mb-3{
+    @apply mb-3 !important
+  }
+  .important-mt-3{
+    @apply mt-3 !important
+  }
+  .important-mt-6{
+    @apply mt-6 !important
+  }
+
+  .important-sm-text-2xl {
+    @apply sm:text-2xl !important;
+  }
+  .important-text-xl {
+    @apply text-xl !important;
+  }
+  .important-text-black {
+    @apply text-black !important;
+  }
+  .important-text-white {
+    @apply text-white !important;
+  }
+  .important-text-blue {
+    @apply text-blue-500 !important;
+  }
+  .important-mt-6 {
+    @apply mt-6 !important;
+  }
+  .important-mt-3 {
+    @apply mt-3 !important;
+  }
+  .important-mb-3 {
+    @apply mb-3 !important;
+  }
+  .important-font-bold {
+    @apply font-bold !important;
+  }
+  .important-py-1 {
+    @apply py-1 !important;
+  }
+  .important-px-2 {
+    @apply px-2 !important;
+  }
+  .important-border-l-2 {
+    @apply border-l-2 !important;
+  }
+  .important-border-orange-500 {
+    @apply border-orange-500 !important;
+  }
+  .important-bg-orange-500 {
+    @apply bg-orange-500 !important;
+  }
+  .important-text-justify {
+    @apply text-justify !important;
+  }
+  .important-sm-text-6 {
+    @apply sm:text-[22px] !important;
+  }
+  .important-sm-text-5 {
+    @apply sm:text-[17px] !important;
+  }
+  .important-font-sans{
+    @apply font-sans !important;
+  }
+  .important-w-full{
+    @apply w-full !important;
+  }
 }
 
-.styled-content h2 {
-  @apply sm:text-2xl text-xl text-black my-1 font-bold py-1 px-2 border-l-2 border-orange-500;
+.styled-content-h { 
+  @apply important-mb-3 important-mt-6 important-py-1 important-px-2 important-border-l-2 important-border-orange-500
+}
+.styled-content-h * {
+  @apply important-sm-text-2xl important-font-bold important-font-sans important-text-xl important-text-black ;
 }
 
-.styled-content h3 {
-  @apply sm:text-[22px] text-xl text-black my-1 font-bold py-1 px-2 border-l-2 border-orange-500 font-sans;
+.styled-content-p {
+  @apply important-mt-3;
 }
-.styled-content-h span strong {
-  @apply sm:text-[22px] text-xl text-black my-1 font-bold py-1 px-2 border-l-2 border-orange-500 font-sans;
-}
-
-.styled-content ul {
-  @apply list-disc pl-6 space-y-1;
+.styled-content-p * {
+  @apply important-text-black important-sm-text-5 important-font-sans important-text-justify  ;
 }
 
-.styled-content a {
-  @apply text-orange-500 underline hover:text-orange-600;
+.styled-content-a {
+  @apply important-mt-3;
 }
-/* .styled-content-p {
-
-} */
-.styled-content-p span {
-  @apply text-black bg-transparent mt-3 font-sans text-left;
-  margin: 0px 0px !important ;
-  padding: 5px 0px !important ;
-}
-.styled-content *{
-  @apply text-black bg-transparent;
-  margin: 0px !important ;
-  padding: 5px 0px !important ;
+.styled-content-a * {
+  @apply important-text-blue important-sm-text-5 important-font-sans important-text-justify  ;
 }
 
-.styled-content li {
-  @apply text-black bg-transparent;
+.styled-content-table{
+  @apply important-w-full important-mt-3
+}
+.styled-content-table tbody tr:first-of-type {
+  @apply important-bg-orange-500 important-text-white ;
+}
+.styled-content-table * {
+  @apply important-text-black important-sm-text-5 important-font-sans important-text-justify  ;
 }
 
-.styled-content div {
-  @apply text-black leading-7 bg-transparent;
+.styled-content-img * {
+  @apply important-w-full 
 }
+
 .simage_resized{
   @apply text-black bg-transparent bg-cover object-cover;
 }
@@ -587,6 +659,7 @@ table th:first-child {
   text-align: justify;
   width: 100%;
   font-style: normal;
+  font-size: 17px;
 }
 .styled-content-table table tbody tr:first-of-type {
   background-color: #ff9028;

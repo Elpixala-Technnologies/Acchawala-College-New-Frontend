@@ -1,5 +1,6 @@
 "use client"
 import TimelineList, { TimelineListTwo } from '@/components/TimelineList'
+import { getTextLengthByTag } from '@/lib/cheerio';
 import React from 'react'
 
 export default function ParsedHtmlContent({ data = [] }: { data: any }) {
@@ -7,19 +8,61 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
         console.error("Expected an array but got:", typeof data, data);
         return <p>Invalid data format</p>;
     }
-
+    console.error("Expected an array but got:", typeof data, data);
     return (
         <div className="bg-transparent w-full text-justify py-2">
             {data.map((section: any, idx) => {
                 const table = section?.div?.figure?.table;
 
+
+
+
+                const textLength = getTextLengthByTag(section?.p, "span");
+                console.log(textLength, "  text");
+                // const length = section?.p?.textContent?.trim()?.split(/\s+/)?.length;
+                // console.log(pLength, "  length");
+                // console.log(section, "  sec")
+
                 return (
                     <div key={idx}>
-                        {section?.p && (
-                            <p
+
+                        {/* {section?.p && textLength <= 100 && (
+                            < p
+                                className="styled-content-p-head bg-transparent mt-3"
+                                dangerouslySetInnerHTML={{ __html: section?.p }}
+                            />
+                        )}
+                        {section?.p && textLength > 100 && (
+                            < p
                                 className="styled-content-p bg-transparent mt-3"
                                 dangerouslySetInnerHTML={{ __html: section?.p }}
                             />
+                        )} */}
+
+
+                        {section?.p && (
+                            (() => {
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(section?.p, 'text/html');
+                                const pContent = doc.body.textContent?.trim();
+                                const pLength = pContent?.split(/\s+/).length;
+
+                                if (pLength && pLength <= 9) {
+                                    return (
+                                        <h3
+                                            className="styled-content-h bg-transparent mt-3"
+                                            dangerouslySetInnerHTML={{ __html: section?.p }}
+                                        />
+                                    );
+                                } else {
+                                    return (
+                                        <p
+                                            className="styled-content-p bg-transparent mt-6 mb-3"
+                                            dangerouslySetInnerHTML={{ __html: section?.p }}
+                                        />
+                                    );
+                                }
+                            })()
                         )}
 
                         {section?.h3 && (
@@ -58,7 +101,7 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                         {section?.p?.image && (
                             // <div className="text-xl font-bold">
                             <div
-                                className="styled-content-img bg-transparent  mt-3 mb-0 w-full"
+                                className="styled-content-img bg-transparent  mt-3 mb-0 w-full text-[16px]"
                                 dangerouslySetInnerHTML={{ __html: section?.p?.image }}
                             />
                             // </div>
