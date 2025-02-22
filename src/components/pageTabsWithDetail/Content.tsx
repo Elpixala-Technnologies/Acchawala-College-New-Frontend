@@ -92,7 +92,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
 
               {/* Title */}
               {section?.title && (
-                <h2 className={`text-2xl font-bold capitalize ${section?.news ? "mb-3" : "border-b border-zinc-500 mb-4 pb-4"}`}>
+                <h2 className={`text-2xl font-bold capitalize ${section?.news ? "mb-3" : "border-b border-zinc-500 mb-2 pb-4"}`}>
                   {section?.title?.t1 && (
                     <span className="text-black">{section?.title?.t1}</span>
                   )}{" "}
