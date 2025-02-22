@@ -16,30 +16,24 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                 return (
                     <div key={idx}>
                         {section?.p && (
-                            <div>
-                                <div
-                                    className="styled-content-p bg-transparent"
-                                    dangerouslySetInnerHTML={{ __html: section?.p }}
-                                />
-                            </div>
+                            <p
+                                className="styled-content-p bg-transparent mt-3"
+                                dangerouslySetInnerHTML={{ __html: section?.p }}
+                            />
                         )}
 
                         {section?.h3 && (
-                            <div className="mt-6 mb-3">
-                                <div
-                                    className="styled-content-h bg-transparent"
-                                    dangerouslySetInnerHTML={{ __html: section?.h3 }}
-                                />
-                            </div>
+                            <h3
+                                className="styled-content-h bg-transparent mt-6 mb-3"
+                                dangerouslySetInnerHTML={{ __html: section?.h3 }}
+                            />
                         )}
 
                         {section?.h2 && (
-                            <div className="mt-6 mb-3">
-                                <div
-                                    className="styled-content-h bg-transparent"
-                                    dangerouslySetInnerHTML={{ __html: section?.h2 }}
-                                />
-                            </div>
+                            <h3
+                                className="styled-content-h bg-transparent mt-6 mb-3"
+                                dangerouslySetInnerHTML={{ __html: section?.h2 }}
+                            />
                         )}
 
                         {section?.ul && (
@@ -54,22 +48,20 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                             </div>
                         )}
 
-                        {table && (
-                            <div className="text-xl font-bold mt-4 bg-black">
-                                <div
-                                    className="styled-content-table bg-transparent"
-                                    dangerouslySetInnerHTML={{ __html: table }}
-                                />
-                            </div>
+                        {section?.div?.figure?.table && (
+                            <div
+                                className="styled-content-table bg-transparenttext-xl font-bold mt-4"
+                                dangerouslySetInnerHTML={{ __html: table }}
+                            />
                         )}
 
                         {section?.p?.image && (
-                            <div className="text-xl font-bold mt-3 mb-0 w-full">
-                                <div
-                                    className="styled-content-img bg-transparent w-full"
-                                    dangerouslySetInnerHTML={{ __html: section?.p?.image }}
-                                />
-                            </div>
+                            // <div className="text-xl font-bold">
+                            <div
+                                className="styled-content-img bg-transparent  mt-3 mb-0 w-full"
+                                dangerouslySetInnerHTML={{ __html: section?.p?.image }}
+                            />
+                            // </div>
                         )}
 
                         {section?.title && (
