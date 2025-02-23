@@ -47,14 +47,14 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                                 const pContent = doc.body.textContent?.trim();
                                 const pLength = pContent?.split(/\s+/).length;
 
-                                if (pLength && pLength <= 9) {
+                                if (pLength && pLength > 1 && pLength <= 9) {
                                     return (
                                         <h3
                                             className="styled-content-h bg-transparent mt-3"
                                             dangerouslySetInnerHTML={{ __html: section?.p }}
                                         />
                                     );
-                                } else {
+                                } else if (pLength && pLength > 9) {
                                     return (
                                         <p
                                             className="styled-content-p bg-transparent mt-6 mb-3"
