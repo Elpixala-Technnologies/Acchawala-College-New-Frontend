@@ -87,7 +87,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
           return (
             <div
               key={index}
-              className={`mt-5 w-full rounded-2xl  md:min-w-[550px] ${section?.news ? "bg-transparent" : "bg-white p-5"}`}
+              className={`mt-5 w-full rounded-2xl  md:min-w-[550px] ${section?.news ? "bg-transparent" : "bg-white sm:p-5 p-3"}`}
             >
 
               {/* Title */}

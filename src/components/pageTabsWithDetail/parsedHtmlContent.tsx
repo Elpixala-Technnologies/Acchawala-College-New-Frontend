@@ -59,10 +59,12 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                                     // else
                                     if (checkLessThanNineWord(data[(idx <= data.length - 2) ? idx + 1 : -1])) {
                                         return (
-                                            <h3
-                                                className="styled-content-h0 bg-transparent mt-3"
-                                                dangerouslySetInnerHTML={{ __html: section?.p }}
-                                            />
+                                            <div className='w-full overflow-x-scroll no-scrollbar'>
+                                                <h3
+                                                    className="styled-content-h0 bg-transparent mt-3"
+                                                    dangerouslySetInnerHTML={{ __html: section?.p }}
+                                                />
+                                            </div>
                                         );
                                     }
 
@@ -78,11 +80,10 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                                     // } else {
                                     return (
                                         <div className="styled-content-x bg-transparent mt-3">
-                                            <h3>
-                                                <span className=''>{splitPContent[0]} </span>
-                                                <span className='text-orange-500'> {splitPContent.slice(1, -1).join(" ")} </span>
+                                            <h3 className='text-start space-x-1'>
+                                                <span className=''>{splitPContent[0]}</span>
+                                                <span className='text-orange-500'>{splitPContent.slice(1, -1).join(" ")}</span>
                                                 <span className=''>{splitPContent[splitPContent.length - 1]}</span>
-
                                             </h3>
                                         </div>
                                     );
@@ -136,7 +137,7 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
 
                         {section?.div?.figure?.table && (
                             <div
-                                className="styled-content-table bg-transparenttext-xl font-bold mt-4"
+                                className="styled-content-table bg-transparenttext-xl font-bold mt-4 overflow-x-scroll"
                                 dangerouslySetInnerHTML={{ __html: table }}
                             />
                         )}
@@ -144,7 +145,7 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                         {section?.p?.image && (
                             // <div className="text-xl font-bold">
                             <div
-                                className="styled-content-img bg-transparent  mt-3 mb-0 w-full text-[16px]"
+                                className="styled-content-img bg-transparent mt-3 mb-0 w-full text-[16px]"
                                 dangerouslySetInnerHTML={{ __html: section?.p?.image }}
                             />
                             // </div>

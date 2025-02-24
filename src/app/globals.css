@@ -622,17 +622,17 @@ table th:first-child {
 }
 
 .styled-content-x { 
-  @apply important-mb-3 important-mt-6 important-py-1 important-px-2 important-border-l-2 important-border-orange-500
+  @apply important-mb-3 important-mt-6 important-py-1 sm:!px-2 !px-1 important-border-l-2 important-border-orange-500
 }
 .styled-content-x * {
-  @apply important-sm-text-2xl important-font-bold important-font-sans important-text-xl !capitalize;
+  @apply important-sm-text-2xl important-font-bold important-font-sans !text-lg !capitalize;
 }
 
 .styled-content-h0 { 
-  /* @apply !pr-2 */
+  @apply  !mt-3 !mb-2 
 }
 .styled-content-h0 * {
-  @apply !mt-3 !mb-2 !pb-1.5 !capitalize border-b-2 sm:!text-2xl important-font-sans !border-orange-500 !text-xl !font-bold !text-gray-700;
+  @apply !capitalize !pb-1.5 border-b-2 !whitespace-nowrap sm:!text-2xl important-font-sans !border-orange-500 !text-xl !font-bold !text-gray-700;
 
 }
 
@@ -640,7 +640,7 @@ table th:first-child {
   @apply important-mt-3;
 }
 .styled-content-p * {
-  @apply important-text-black important-sm-text-5 important-font-sans important-text-justify  ;
+  @apply important-text-black important-sm-text-5 text-sm important-font-sans important-text-justify  ;
 }
 
 .styled-content-a {
@@ -652,6 +652,9 @@ table th:first-child {
 
 .styled-content-table{
   @apply important-w-full important-mt-3
+}
+.styled-content-table colgroup col{
+  @apply !min-w-[350px]
 }
 .styled-content-table tbody tr:first-of-type {
   @apply important-bg-orange-500 important-text-white ;
