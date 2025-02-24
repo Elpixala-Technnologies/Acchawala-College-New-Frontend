@@ -9,11 +9,10 @@ const Wrapper = ({
   as: Component = "section",
 }: any) => {
   return (
-    <Component className={`w-full px-5 md:px-10 ${bgColor} ${containerClassName}`}>
+    <Component className={`w-full sm:px-1 px-0 md:px-10 ${bgColor} ${containerClassName}`}>
       <div
-        className={`mx-auto w-full ${isMaxWidthChangeRequired}  ${
-          className || ""
-        }`}
+        className={`mx-auto w-full ${isMaxWidthChangeRequired}  ${className || ""
+          }`}
       >
         {children}
       </div>
@@ -30,9 +29,8 @@ export const Wrapper1 = ({
 }: any) => {
   return (
     <div
-      className={`mx-auto w-full ${isMaxWidthChangeRequired} px-5 md:px-10 ${
-        className || ""
-      }`}
+      className={`mx-auto w-full ${isMaxWidthChangeRequired} px-5 md:px-10 ${className || ""
+        }`}
     >
       {children}
     </div>

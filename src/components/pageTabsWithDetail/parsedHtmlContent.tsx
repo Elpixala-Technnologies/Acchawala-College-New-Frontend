@@ -15,7 +15,7 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
         const pContent = doc.body.textContent?.trim();
         const pLength = pContent?.split(/\s+/).length;
 
-        if (pLength && pLength > 1 && pLength <= 9) return true;
+        if (pLength && pLength > 1 && pLength <= 11) return true;
         return false
 
     }
@@ -98,7 +98,15 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                                     //     // />
                                     // );
 
-                                } else if (pLength && pLength > 9) {
+                                } else if (pLength && pLength > 11) {
+                                    if (pLength <= 15) {
+                                        return (
+                                            <p
+                                                className="styled-content-p bg-transparent mt-6 mb-3 important-font-bold"
+                                                dangerouslySetInnerHTML={{ __html: section?.p }}
+                                            />
+                                        );
+                                    }
                                     return (
                                         <p
                                             className="styled-content-p bg-transparent mt-6 mb-3"
@@ -136,10 +144,12 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                         )}
 
                         {section?.div?.figure?.table && (
-                            <div
-                                className="styled-content-table bg-transparenttext-xl font-bold mt-4 overflow-x-scroll"
-                                dangerouslySetInnerHTML={{ __html: table }}
-                            />
+                            <div className='mt-4 overflow-x-scroll '>
+                                <div
+                                    className="styled-content-table "
+                                    dangerouslySetInnerHTML={{ __html: table }}
+                                />
+                            </div>
                         )}
 
                         {section?.p?.image && (
