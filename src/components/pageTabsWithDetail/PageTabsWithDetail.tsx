@@ -46,7 +46,7 @@ export function PageTabsWithDetailWrapperContent({
   };
 
   return (
-    <Wrapper containerClassName="my-5" className="flex w-full flex-col pt-0">
+    <Wrapper containerClassName="my-5" className="flex w-full flex-col pt-0" padding="px-0 sm:px-1 md:px-10">
       <Navbar
         navItems={data}
         onSelect={handleSelect}

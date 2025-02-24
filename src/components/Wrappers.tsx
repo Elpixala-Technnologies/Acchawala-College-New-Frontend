@@ -5,11 +5,12 @@ const Wrapper = ({
   bgColor = "bg-transparent",
   children,
   className,
+  padding = "px-5 md:px-10",
   isMaxWidthChangeRequired = "max-w-screen-2xl",
   as: Component = "section",
 }: any) => {
   return (
-    <Component className={`w-full sm:px-1 px-0 md:px-10 ${bgColor} ${containerClassName}`}>
+    <Component className={`w-full ${padding} ${bgColor} ${containerClassName}`}>
       <div
         className={`mx-auto w-full ${isMaxWidthChangeRequired}  ${className || ""
           }`}
