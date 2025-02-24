@@ -8,7 +8,18 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
         console.error("Expected an array but got:", typeof data, data);
         return <p>Invalid data format</p>;
     }
-    console.error("Expected an array but got:", typeof data, data);
+
+    function checkLessThanNineWord(section: any) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(section?.p, 'text/html');
+        const pContent = doc.body.textContent?.trim();
+        const pLength = pContent?.split(/\s+/).length;
+
+        if (pLength && pLength > 1 && pLength <= 9) return true;
+        return false
+
+    }
+    console.log("Expected an array but got:", typeof data, data);
     return (
         <div className="bg-transparent w-full text-justify py-2">
             {data.map((section: any, idx) => {
@@ -21,24 +32,10 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                 console.log(textLength, "  text");
                 // const length = section?.p?.textContent?.trim()?.split(/\s+/)?.length;
                 // console.log(pLength, "  length");
-                // console.log(section, "  sec")
+                console.log(section, "  sec")
 
                 return (
                     <div key={idx}>
-
-                        {/* {section?.p && textLength <= 100 && (
-                            < p
-                                className="styled-content-p-head bg-transparent mt-3"
-                                dangerouslySetInnerHTML={{ __html: section?.p }}
-                            />
-                        )}
-                        {section?.p && textLength > 100 && (
-                            < p
-                                className="styled-content-p bg-transparent mt-3"
-                                dangerouslySetInnerHTML={{ __html: section?.p }}
-                            />
-                        )} */}
-
 
                         {section?.p && (
                             (() => {
@@ -47,13 +44,59 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                                 const pContent = doc.body.textContent?.trim();
                                 const pLength = pContent?.split(/\s+/).length;
 
-                                if (pLength && pLength > 1 && pLength <= 9) {
+                                if (checkLessThanNineWord(section)) {
+                                    // checking next heading 
+                                    // if (checkLessThanNineWord(data[(idx <= data.length - 1 && idx >= 1) ? idx - 1 : -1])) {
+                                    //     const newHeading = String(data[idx - 1]?.p)?.concat(section?.p)
+                                    //     idx++
+                                    //     return (
+                                    //         <h3
+                                    //             className="styled-content-h bg-transparent mt-3"
+                                    //             dangerouslySetInnerHTML={{ __html: newHeading }}
+                                    //         />
+                                    //     );
+                                    // }
+                                    // else
+                                    if (checkLessThanNineWord(data[(idx <= data.length - 2) ? idx + 1 : -1])) {
+                                        return (
+                                            <h3
+                                                className="styled-content-h0 bg-transparent mt-3"
+                                                dangerouslySetInnerHTML={{ __html: section?.p }}
+                                            />
+                                        );
+                                    }
+
+                                    // styling heading of section .p
+                                    const splitPContent: string[] = pContent?.split(" ") as string[]
+                                    // if (pContent?.includes(":")) {
+                                    //     const splitPContentSteps = pContent.split(":")
+                                    //     return (
+                                    //         <div className="styled-content-x bg-transparent mt-3">
+                                    //             <h3><span className='text-orange-500'>{splitPContentSteps[0]}:</span> {splitPContentSteps[1]}</h3>
+                                    //         </div>
+                                    //     );
+                                    // } else {
                                     return (
-                                        <h3
-                                            className="styled-content-h bg-transparent mt-3"
-                                            dangerouslySetInnerHTML={{ __html: section?.p }}
-                                        />
+                                        <div className="styled-content-x bg-transparent mt-3">
+                                            <h3>
+                                                <span className=''>{splitPContent[0]} </span>
+                                                <span className='text-orange-500'> {splitPContent.slice(1, -1).join(" ")} </span>
+                                                <span className=''>{splitPContent[splitPContent.length - 1]}</span>
+
+                                            </h3>
+                                        </div>
                                     );
+                                    // }
+                                    // return (
+                                    //     <div className="styled-content-x bg-transparent mt-3">
+                                    //         <h3><span className='text-orange-500'>{splitPContent[0]}</span> {splitPContent.slice(1).join(" ")}</h3>
+                                    //     </div>
+                                    //     // <h3
+                                    //     //     className="styled-content-h bg-transparent mt-3"
+                                    //     //     dangerouslySetInnerHTML={{ __html: section?.p }}
+                                    //     // />
+                                    // );
+
                                 } else if (pLength && pLength > 9) {
                                     return (
                                         <p
