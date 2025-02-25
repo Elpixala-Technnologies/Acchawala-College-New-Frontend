@@ -144,7 +144,7 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                         )}
 
                         {section?.div?.figure?.table && (
-                            <div className='mt-4 overflow-x-scroll '>
+                            <div className='mt-4 overflow-x-scroll scroll-container'>
                                 <div
                                     className="styled-content-table "
                                     dangerouslySetInnerHTML={{ __html: table }}

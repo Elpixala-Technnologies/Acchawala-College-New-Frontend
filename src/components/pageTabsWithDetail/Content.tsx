@@ -108,7 +108,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
               )}
               {/* Author */}
               {section?.author && section?.author?.data?.attributes?.name && (
-                <div className="mb-8 flex items-center gap-x-2">
+                <div className="sm:mb-8 mb-4 flex items-center gap-x-2">
                   {section?.author?.data?.attributes?.avatar?.data?.attributes
                     ?.url && (
                       <Image
@@ -122,13 +122,13 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
                         height={48}
                       />
                     )}
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col sm:gap-2 gap-1.5">
                     {section?.author?.data?.attributes?.name && (
-                      <p className="text-3xl font-bold text-orange-500">
+                      <p className="md:text-3xl sm:text-xl xs:text-lg font-bold text-orange-500">
                         {section?.author?.data?.attributes?.name}
                       </p>
                     )}
-                    <div className="flex items-center gap-2 text-zinc-500">
+                    <div className="flex items-center md:text-lg sm:text-sm xs:text-[14px] text-[12px] sm:gap-2 gap-1 text-zinc-500">
                       {section?.author?.data?.attributes?.designation && (
                         <p className="font-bold">
                           {section?.author?.data?.attributes?.designation} |

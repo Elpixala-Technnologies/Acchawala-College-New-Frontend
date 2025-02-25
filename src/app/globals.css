@@ -17,7 +17,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-
+html, body {
+  @apply overflow-auto;
+}
+.scroll-container {
+  @apply overflow-y-auto  overflow-x-auto;
+  -webkit-overflow-scrolling: touch;
+}
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
