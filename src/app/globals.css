@@ -19,11 +19,16 @@ body {
 }
 /* html, body {
   @apply overflow-auto;
-}
-.scroll-container {
-  @apply overflow-y-auto  overflow-x-auto;
-  -webkit-overflow-scrolling: touch;
 } */
+.scroll-container {
+  @apply overflow-y-auto overflow-x-auto;
+  -webkit-overflow-scrolling: initial;
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+}
+
+/* .scroll-container */
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -621,24 +626,24 @@ table th:first-child {
 }
 
 .styled-content-h { 
-  @apply important-mb-3 important-mt-6 important-py-1 important-px-2 important-border-l-2 important-border-orange-500
+  @apply !mt-5 important-py-1 important-px-2 important-border-l-2 important-border-orange-500
 }
 .styled-content-h * {
   @apply important-sm-text-2xl important-font-bold important-font-sans important-text-xl important-text-black !capitalize;
 }
 
 .styled-content-x { 
-  @apply important-mb-3 important-mt-6 important-py-1 sm:!px-2 !px-1 important-border-l-2 important-border-orange-500
+  @apply !mt-5 important-py-1 sm:!px-2 !px-1 important-border-l-2 important-border-orange-500
 }
 .styled-content-x * {
   @apply important-sm-text-2xl important-font-bold important-font-sans !text-lg !capitalize;
 }
 
 .styled-content-h0 { 
-  @apply  !mt-3 !mb-2 
+  @apply  !mt-3 !pb-1.5 
 }
 .styled-content-h0 * {
-  @apply !capitalize !pb-1.5 border-b-2 !whitespace-nowrap sm:!text-2xl important-font-sans !border-orange-500 !text-xl !font-bold !text-gray-700;
+  @apply !capitalize !pb-1.5 border-b-2 !whitespace-nowrap !border-orange-500 sm:!text-2xl important-font-sans !text-xl !font-bold !text-gray-700;
 
 }
 
@@ -646,7 +651,7 @@ table th:first-child {
   @apply important-mt-3;
 }
 .styled-content-p * {
-  @apply important-text-black important-sm-text-5 text-sm important-font-sans important-text-justify  ;
+  @apply important-text-black important-sm-text-5 !text-sm important-font-sans important-text-justify  ;
 }
 
 .styled-content-a {
@@ -666,7 +671,7 @@ table th:first-child {
   @apply important-bg-orange-500 important-text-white important-text-center;
 }
 .styled-content-table * {
-  @apply important-text-black important-sm-text-5 important-font-sans important-text-justify ;
+  @apply important-text-black important-sm-text-5 !text-sm important-font-sans !text-left ;
 }
 
 .styled-content-img * {

@@ -39,7 +39,7 @@ export default function ExamDetailBanner({
       <div className="flex gap-5 max-md:flex-col-reverse">
         {/* Left Side  */}
         <div className="flex flex-[8] gap-5">
-          <h2 className="md:text-3xl sm:text-2xl text-xl font-bold max-sm:text-center md:pt-2">
+          <h2 className="md:text-3xl sm:text-2xl text-xl font-bold max-sm:text-justify md:pt-2">
             {examName} : {titleAddition}
           </h2>
         </div>

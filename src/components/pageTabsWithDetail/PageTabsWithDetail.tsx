@@ -89,7 +89,7 @@ function AboutAuthor({ author, description, updatedAt }: any) {
               height={48}
             />
           )}
-          <div className="flex flex-col sm:gap-2 gap-1.5">
+          <div className="flex flex-col gap-2">
             {author?.name && (
               <p className="md:text-3xl sm:text-xl xs:text-lg font-bold text-orange-500">
                 {author?.name}
@@ -111,7 +111,7 @@ function AboutAuthor({ author, description, updatedAt }: any) {
       {/* description  */}
       {description && (
         <p
-          className={`my-2 mb-5 text-wrap border-l-4 border-orange-500 py-2 pl-5 text-justify text-lg font-medium italic text-black`}
+          className={`my-2 mb-5 text-wrap sm:text-lg text-sm border-l-4 border-orange-500 sm:pl-5 pl-3 text-justify font-medium italic text-black`}
         >
           {description}
         </p>

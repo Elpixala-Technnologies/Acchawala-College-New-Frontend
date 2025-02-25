@@ -35,7 +35,7 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                 console.log(section, "  sec")
 
                 return (
-                    <div key={idx}>
+                    <div key={idx} className='p-[0.1px]'>
 
                         {section?.p && (
                             (() => {
@@ -45,71 +45,45 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                                 const pLength = pContent?.split(/\s+/).length;
 
                                 if (checkLessThanNineWord(section)) {
-                                    // checking next heading 
-                                    // if (checkLessThanNineWord(data[(idx <= data.length - 1 && idx >= 1) ? idx - 1 : -1])) {
-                                    //     const newHeading = String(data[idx - 1]?.p)?.concat(section?.p)
-                                    //     idx++
-                                    //     return (
-                                    //         <h3
-                                    //             className="styled-content-h bg-transparent mt-3"
-                                    //             dangerouslySetInnerHTML={{ __html: newHeading }}
-                                    //         />
-                                    //     );
-                                    // }
-                                    // else
-                                    if (checkLessThanNineWord(data[(idx <= data.length - 2) ? idx + 1 : -1])) {
+
+
+                                    if (checkLessThanNineWord(data[(idx <= data.length - 2) ? idx + 1 : -1]) || checkLessThanNineWord(section?.p)) {
+                                        idx++
                                         return (
                                             <div className='w-full overflow-x-scroll no-scrollbar'>
                                                 <h3
-                                                    className="styled-content-h0 bg-transparent mt-3"
+                                                    className="styled-content-h0 bg-transparent"
                                                     dangerouslySetInnerHTML={{ __html: section?.p }}
                                                 />
                                             </div>
                                         );
                                     }
 
-                                    // styling heading of section .p
+
+
                                     const splitPContent: string[] = pContent?.split(" ") as string[]
-                                    // if (pContent?.includes(":")) {
-                                    //     const splitPContentSteps = pContent.split(":")
-                                    //     return (
-                                    //         <div className="styled-content-x bg-transparent mt-3">
-                                    //             <h3><span className='text-orange-500'>{splitPContentSteps[0]}:</span> {splitPContentSteps[1]}</h3>
-                                    //         </div>
-                                    //     );
-                                    // } else {
                                     return (
-                                        <div className="styled-content-x bg-transparent mt-3">
-                                            <h3 className='text-start space-x-1'>
+                                        <div className="styled-content-x bg-transparent">
+                                            <h3 className='!text-start !space-x-1'>
                                                 <span className=''>{splitPContent[0]}</span>
                                                 <span className='text-orange-500'>{splitPContent.slice(1, -1).join(" ")}</span>
                                                 <span className=''>{splitPContent[splitPContent.length - 1]}</span>
                                             </h3>
                                         </div>
                                     );
-                                    // }
-                                    // return (
-                                    //     <div className="styled-content-x bg-transparent mt-3">
-                                    //         <h3><span className='text-orange-500'>{splitPContent[0]}</span> {splitPContent.slice(1).join(" ")}</h3>
-                                    //     </div>
-                                    //     // <h3
-                                    //     //     className="styled-content-h bg-transparent mt-3"
-                                    //     //     dangerouslySetInnerHTML={{ __html: section?.p }}
-                                    //     // />
-                                    // );
 
                                 } else if (pLength && pLength > 11) {
                                     if (pLength <= 15) {
                                         return (
                                             <p
-                                                className="styled-content-p bg-transparent mt-6 mb-3 important-font-bold"
+                                                className="styled-content-p bg-transparent important-font-bold"
                                                 dangerouslySetInnerHTML={{ __html: section?.p }}
                                             />
                                         );
                                     }
                                     return (
                                         <p
-                                            className="styled-content-p bg-transparent mt-6 mb-3"
+                                            className="styled-content-p bg-transparent"
                                             dangerouslySetInnerHTML={{ __html: section?.p }}
                                         />
                                     );
@@ -119,14 +93,14 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
 
                         {section?.h3 && (
                             <h3
-                                className="styled-content-h bg-transparent mt-6 mb-3"
+                                className="styled-content-h bg-transparent"
                                 dangerouslySetInnerHTML={{ __html: section?.h3 }}
                             />
                         )}
 
                         {section?.h2 && (
                             <h3
-                                className="styled-content-h bg-transparent mt-6 mb-3"
+                                className="styled-content-h bg-transparent"
                                 dangerouslySetInnerHTML={{ __html: section?.h2 }}
                             />
                         )}
@@ -144,7 +118,7 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                         )}
 
                         {section?.div?.figure?.table && (
-                            <div className='mt-4 overflow-x-scroll scroll-container'>
+                            <div className='overflow-x-scroll scroll-container '>
                                 <div
                                     className="styled-content-table "
                                     dangerouslySetInnerHTML={{ __html: table }}
