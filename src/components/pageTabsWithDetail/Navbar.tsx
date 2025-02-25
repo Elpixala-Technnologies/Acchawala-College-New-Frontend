@@ -67,7 +67,7 @@ export default function Navbar({ navItems, onSelect, selectedIndex }: any) {
       </ul>
       {showLeftButton && (
         <button
-          className="absolute left-1 top-1/2 -translate-y-1/2 transform rounded-full bg-orange-500 p-1 opacity-60 hover:opacity-100"
+          className="absolute left-1 top-1/2 -translate-y-1/2 transform rounded-full bg-orange-500 p-1 opacity-60 hover:opacity-100 sm:inline-block hidden"
           onClick={handleScrollLeft}
         >
           <TiChevronLeft className="text-3xl text-white" />
@@ -75,7 +75,7 @@ export default function Navbar({ navItems, onSelect, selectedIndex }: any) {
       )}
       {showRightButton && (
         <button
-          className="absolute right-1 top-1/2 -translate-y-1/2 transform rounded-full bg-orange-500 p-1 opacity-60 hover:opacity-100"
+          className="absolute right-1 top-1/2 -translate-y-1/2 transform rounded-full bg-orange-500 p-1 opacity-60 hover:opacity-100 sm:inline-block hidden"
           onClick={handleScrollRight}
         >
           <TiChevronRight className="text-3xl text-white" />
