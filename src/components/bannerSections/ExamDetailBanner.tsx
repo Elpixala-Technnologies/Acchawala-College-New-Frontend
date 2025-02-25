@@ -22,8 +22,8 @@ export default function ExamDetailBanner({
   return (
     <Wrapper
       as="section"
-      containerClassName="mt-32 max-md:mt-28 px-5"
-      className="orangeRedDownGradient space-y-4 rounded-2xl p-8 shadow-lg"
+      containerClassName="mt-32 max-md:mt-28 sm:px-5 px-2"
+      className="orangeRedDownGradient space-y-4 rounded-2xl sm:p-8 p-4 shadow-lg"
     >
       {/* Upper Side  */}
       <p className="text-zinc-600">
@@ -36,10 +36,10 @@ export default function ExamDetailBanner({
         </Link>{" "}
         &gt; <span className="text-bold text-orange-500">{breadCrumb}</span>
       </p>
-      <div className="flex gap-5 max-md:flex-col max-md:flex-col-reverse">
+      <div className="flex gap-5 max-md:flex-col-reverse">
         {/* Left Side  */}
         <div className="flex flex-[8] gap-5">
-          <h2 className="text-3xl font-bold max-sm:text-center md:pt-2 md:text-4xl">
+          <h2 className="md:text-3xl sm:text-2xl text-xl font-bold max-sm:text-center md:pt-2">
             {examName} : {titleAddition}
           </h2>
         </div>
@@ -59,16 +59,16 @@ export default function ExamDetailBanner({
       {/* Down Side  */}
       <div className="flex flex-wrap items-center justify-between">
         <p className="flex items-center gap-2">
-          <FaClockRotateLeft className="text-xl" />
+          <FaClockRotateLeft className="md:text-xl sm:text-lg text-sm" />
           <span>Updated on {formatDate(lastUpdate)}</span>
         </p>
         <div className="flex flex-wrap gap-5 max-md:w-full">
           <p className="flex items-center gap-2">
-            <MdOutlineFileDownload className="text-xl" />
+            <MdOutlineFileDownload className="md:text-xl sm:text-lg text-sm" />
             <span>Save</span>
           </p>
           <p className="flex items-center gap-2">
-            <AiOutlineQuestionCircle className="text-xl" />
+            <AiOutlineQuestionCircle className="md:text-xl sm:text-lg text-sm" />
             <span>Ask</span>
           </p>
           <div className="flex flex-wrap gap-5 max-md:!w-full">
