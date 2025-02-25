@@ -193,3 +193,14 @@ export function getTextLengthByTag(htmlString: string, tag: string): number {
     let textContent = $(tag).text().replace(/\s+/g, " ").trim(); // Extract and clean text
     return textContent.length;
 }
+
+export function checkLessThanElevenWord(sectionText: any) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(sectionText, 'text/html');
+    const pContent = doc.body.textContent?.trim();
+    const pLength = pContent?.split(/\s+/).length;
+
+    if (pLength && pLength > 1 && pLength <= 11) return true;
+    return false
+
+}

@@ -9,27 +9,24 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
         return <p>Invalid data format</p>;
     }
 
-    function checkLessThanNineWord(section: any) {
+    function checkLessThanElevenWord(sectionText: any) {
         const parser = new DOMParser();
-        const doc = parser.parseFromString(section?.p, 'text/html');
+        const doc = parser.parseFromString(sectionText, 'text/html');
         const pContent = doc.body.textContent?.trim();
         const pLength = pContent?.split(/\s+/).length;
 
         if (pLength && pLength > 1 && pLength <= 11) return true;
         return false
-
     }
-    console.log("Expected an array but got:", typeof data, data);
+
+    // console.log("Expected an array but got:", typeof data, data);
     return (
         <div className="bg-transparent w-full text-justify py-2">
             {data.map((section: any, idx) => {
                 const table = section?.div?.figure?.table;
 
-
-
-
-                const textLength = getTextLengthByTag(section?.p, "span");
-                console.log(textLength, "  text");
+                // const textLength = getTextLengthByTag(section?.p, "span");
+                // console.log(textLength, "  text");
                 // const length = section?.p?.textContent?.trim()?.split(/\s+/)?.length;
                 // console.log(pLength, "  length");
                 console.log(section, "  sec")
@@ -44,11 +41,10 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                                 const pContent = doc.body.textContent?.trim();
                                 const pLength = pContent?.split(/\s+/).length;
 
-                                if (checkLessThanNineWord(section)) {
+                                if (pLength && pLength > 1 && pLength <= 11) {
 
+                                    if (checkLessThanElevenWord(data[(idx <= data.length - 2) ? idx + 1 : -1]?.p)) {
 
-                                    if (checkLessThanNineWord(data[(idx <= data.length - 2) ? idx + 1 : -1]) || checkLessThanNineWord(section?.p)) {
-                                        idx++
                                         return (
                                             <div className='w-full overflow-x-scroll no-scrollbar'>
                                                 <h3
@@ -59,18 +55,31 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                                         );
                                     }
 
+                                    else {
+                                        const splitPContent: string[] = pContent?.split(" ") as string[]
 
+                                        if (splitPContent?.length <= 2) {
+                                            return (
+                                                <div className="styled-content-x bg-transparent">
+                                                    <h3 className='!text-start !space-x-1'>
+                                                        <span className=''>{splitPContent[0]}</span>
+                                                        <span className='text-orange-500'>{splitPContent.slice(1).join(" ")}</span>
+                                                    </h3>
+                                                </div>
+                                            )
+                                        } else {
 
-                                    const splitPContent: string[] = pContent?.split(" ") as string[]
-                                    return (
-                                        <div className="styled-content-x bg-transparent">
-                                            <h3 className='!text-start !space-x-1'>
-                                                <span className=''>{splitPContent[0]}</span>
-                                                <span className='text-orange-500'>{splitPContent.slice(1, -1).join(" ")}</span>
-                                                <span className=''>{splitPContent[splitPContent.length - 1]}</span>
-                                            </h3>
-                                        </div>
-                                    );
+                                            return (
+                                                <div className="styled-content-x bg-transparent">
+                                                    <h3 className='!text-start !space-x-1'>
+                                                        <span className=''>{splitPContent[0]}</span>
+                                                        <span className='text-orange-500'>{splitPContent.slice(1, -1).join(" ")}</span>
+                                                        <span className=''>{splitPContent[splitPContent.length - 1]}</span>
+                                                    </h3>
+                                                </div>
+                                            );
+                                        }
+                                    }
 
                                 } else if (pLength && pLength > 11) {
                                     if (pLength <= 15) {
