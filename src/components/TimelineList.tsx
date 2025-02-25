@@ -110,7 +110,7 @@ export function TimelineListTwo({ data }: any) {
                     }`}
                 >
                   {item?.text && (
-                    <p className=" text-justify text-[16px] font-normal">
+                    <p className=" text-justify sm:text-[16px] text-sm font-normal">
                       {item?.text}
                     </p>
                   )}
@@ -147,7 +147,7 @@ export function TimelineListTwo({ data }: any) {
                   }`}
               >
                 {item?.text && (
-                  <p className=" text-justify text-[16px] font-normal">
+                  <p className=" text-justify sm:text-[16px] text-sm font-normal">
                     {text}
                   </p>
                 )}
