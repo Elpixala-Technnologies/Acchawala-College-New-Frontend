@@ -17,13 +17,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-html, body {
+/* html, body {
   @apply overflow-auto;
 }
 .scroll-container {
   @apply overflow-y-auto  overflow-x-auto;
   -webkit-overflow-scrolling: touch;
-}
+} */
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -657,10 +657,10 @@ table th:first-child {
 }
 
 .styled-content-table {
-  @apply important-w-full important-mt-3
+  @apply important-w-full important-mt-3 !table-fixed
 }
 .styled-content-table colgroup col{
-  @apply !min-w-[350px]
+  @apply !min-w-[350px] !w-[350px]  !table-fixed
 }
 .styled-content-table table tbody tr:first-of-type * {
   @apply important-bg-orange-500 important-text-white important-text-center;
