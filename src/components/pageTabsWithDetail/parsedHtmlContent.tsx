@@ -6,7 +6,7 @@ import React from 'react'
 export default function ParsedHtmlContent({ data = [] }: { data: any }) {
     if (!Array.isArray(data)) {
         console.error("Expected an array but got:", typeof data, data);
-        return <p>Invalid data format</p>;
+        return <p>Invalid data format in pasrsedHtmlContent</p>;
     }
 
     function checkLessThanElevenWord(sectionText: any) {
@@ -25,64 +25,23 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
             {data.map((section: any, idx) => {
                 const table = section?.div?.figure?.table;
 
-                // const textLength = getTextLengthByTag(section?.p, "span");
-                // console.log(textLength, "  text");
-                // const length = section?.p?.textContent?.trim()?.split(/\s+/)?.length;
-                // console.log(pLength, "  length");
-                console.log(section, "  sec")
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(section?.h3, 'text/html');
+                const pContent = doc.body.textContent?.trim();
+                const pLength = pContent?.split(/\s+/).length;
 
-                return (
-                    <div key={idx} className='p-[0.1px]'>
+                if ((Number(pLength) > 1) || section?.p || section?.h3 || section?.h1 || section?.ul || section?.ol || section?.div?.figure?.table || section?.p?.image || section?.title || section?.editorText) {
+                    return (
+                        <div key={idx} className='p-[0.1px]'>
 
-                        {section?.p && (
-                            (() => {
-                                const parser = new DOMParser();
-                                const doc = parser.parseFromString(section?.p, 'text/html');
-                                const pContent = doc.body.textContent?.trim();
-                                const pLength = pContent?.split(/\s+/).length;
+                            {section?.p && (
+                                (() => {
+                                    const doc = parser.parseFromString(section?.p, 'text/html');
+                                    const pContent = doc.body.textContent?.trim();
+                                    const pLength = pContent?.split(/\s+/).length;
 
-                                if (pLength && pLength > 1 && pLength <= 11) {
 
-                                    if (checkLessThanElevenWord(data[(idx <= data.length - 2) ? idx + 1 : -1]?.p)) {
-
-                                        return (
-                                            <div className='w-full overflow-x-scroll no-scrollbar'>
-                                                <h3
-                                                    className="styled-content-h0 bg-transparent"
-                                                    dangerouslySetInnerHTML={{ __html: section?.p }}
-                                                />
-                                            </div>
-                                        );
-                                    }
-
-                                    else {
-                                        const splitPContent: string[] = pContent?.split(" ") as string[]
-
-                                        if (splitPContent?.length <= 2) {
-                                            return (
-                                                <div className="styled-content-x bg-transparent">
-                                                    <h3 className='!text-start !space-x-1'>
-                                                        <span className=''>{splitPContent[0]}</span>
-                                                        <span className='text-orange-500'>{splitPContent.slice(1).join(" ")}</span>
-                                                    </h3>
-                                                </div>
-                                            )
-                                        } else {
-
-                                            return (
-                                                <div className="styled-content-x bg-transparent">
-                                                    <h3 className='!text-start !space-x-1'>
-                                                        <span className=''>{splitPContent[0]}</span>
-                                                        <span className='text-orange-500'>{splitPContent.slice(1, -1).join(" ")}</span>
-                                                        <span className=''>{splitPContent[splitPContent.length - 1]}</span>
-                                                    </h3>
-                                                </div>
-                                            );
-                                        }
-                                    }
-
-                                } else if (pLength && pLength > 11) {
-                                    if (pLength <= 15) {
+                                    if (pLength && pLength < 16) {
                                         return (
                                             <p
                                                 className="styled-content-p bg-transparent important-font-bold"
@@ -96,69 +55,108 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                                             dangerouslySetInnerHTML={{ __html: section?.p }}
                                         />
                                     );
-                                }
-                            })()
-                        )}
+                                })()
+                            )}
+                            {section?.h3 && (
+                                (() => {
+                                    const doc = parser.parseFromString(section?.h3, 'text/html');
+                                    const pContent = doc.body.textContent?.trim();
+                                    // const pLength = pContent?.split(/\s+/).length;
 
-                        {section?.h3 && (
-                            <h3
-                                className="styled-content-h bg-transparent"
-                                dangerouslySetInnerHTML={{ __html: section?.h3 }}
-                            />
-                        )}
+                                    // if (pLength && pLength > 1 && pLength <= 11) {
 
-                        {section?.h2 && (
-                            <h3
-                                className="styled-content-h bg-transparent"
-                                dangerouslySetInnerHTML={{ __html: section?.h2 }}
-                            />
-                        )}
+                                    if (data[(idx <= data.length - 2) ? idx + 1 : -1]?.h3) {
 
-                        {section?.ul && (
-                            <div className="text-xl font-bold mt-3 mb-0">
-                                <TimelineListTwo data={section?.ul} />
-                            </div>
-                        )}
+                                        return (
+                                            <div className='w-full overflow-x-scroll no-scrollbar whitespace-nowrap'>
+                                                <h3
+                                                    className="styled-content-h0 bg-transparent"
+                                                    dangerouslySetInnerHTML={{ __html: section?.h3 }}
+                                                />
+                                            </div>
+                                        );
+                                    }
 
-                        {section?.ol && (
-                            <div className="text-xl font-bold mt-3 mb-0">
-                                <TimelineListTwo data={section?.ol} />
-                            </div>
-                        )}
+                                    else {
+                                        const splitPContent: string[] = pContent?.split(" ") as string[]
 
-                        {section?.div?.figure?.table && (
-                            <div className='overflow-x-scroll scroll-container '>
-                                <div
-                                    className="styled-content-table "
-                                    dangerouslySetInnerHTML={{ __html: table }}
+                                        if (splitPContent?.length > 1 && splitPContent?.length <= 2) {
+                                            return (
+                                                <div className="styled-content-x bg-transparent">
+                                                    <h3 className='!text-start !space-x-1'>
+                                                        <span className=''>{splitPContent[0]}</span>
+                                                        <span className='text-orange-500'>{splitPContent.slice(1).join(" ")}</span>
+                                                    </h3>
+                                                </div>
+                                            )
+                                        } else if (splitPContent?.length > 2) {
+
+                                            return (
+                                                <div className="styled-content-x bg-transparent">
+                                                    <h3 className='!text-start !space-x-1'>
+                                                        <span className=''>{splitPContent[0]}</span>
+                                                        <span className='text-orange-500'>{splitPContent.slice(1, -1).join(" ")}</span>
+                                                        <span className=''>{splitPContent[splitPContent.length - 1]}</span>
+                                                    </h3>
+                                                </div>
+                                            );
+                                        }
+                                    }
+                                })()
+                            )}
+
+                            {(section?.h1) && (
+                                <h1
+                                    className="styled-content-h bg-transparent"
+                                    dangerouslySetInnerHTML={{ __html: section?.h1 }}
                                 />
-                            </div>
-                        )}
+                            )}
 
-                        {section?.p?.image && (
-                            // <div className="text-xl font-bold">
-                            <div
-                                className="styled-content-img bg-transparent mt-3 mb-0 w-full text-[16px]"
-                                dangerouslySetInnerHTML={{ __html: section?.p?.image }}
-                            />
-                            // </div>
-                        )}
+                            {section?.ul && (
+                                <div className="text-xl font-bold mt-3 mb-0">
+                                    <TimelineListTwo data={section?.ul} />
+                                </div>
+                            )}
 
-                        {section?.title && (
-                            <h2 className={`text-2xl font-bold capitalize ${section?.news ? "mb-3" : "border-b border-zinc-500 mb-4 pb-4"}`}>
-                                {section?.title?.t1 && <span className="text-black">{section?.title?.t1}</span>}{" "}
-                                {section?.title?.t2 && <span className="text-orange-500">{section?.title?.t2}</span>}{" "}
-                                {section?.title?.t3 && <span className="text-black">{section?.title?.t3}</span>}{" "}
-                            </h2>
-                        )}
+                            {section?.ol && (
+                                <div className="text-xl font-bold mt-3 mb-0">
+                                    <TimelineListTwo data={section?.ol} />
+                                </div>
+                            )}
 
-                        {section?.editorText && (
-                            <div>
-                                <ParsedHtmlContent data={section?.editorText} />
-                            </div>
-                        )}
-                    </div>
-                );
+                            {section?.div?.figure?.table && (
+                                <div className='overflow-x-scroll scroll-container '>
+                                    <div
+                                        className="styled-content-table "
+                                        dangerouslySetInnerHTML={{ __html: table }}
+                                    />
+                                </div>
+                            )}
+
+                            {section?.p?.image && (
+                                <div
+                                    className="styled-content-img bg-transparent mt-3 mb-0 w-full text-[16px]"
+                                    dangerouslySetInnerHTML={{ __html: section?.p?.image }}
+                                />
+                            )}
+
+                            {section?.title && (
+                                <h2 className={`text-2xl font-bold capitalize ${section?.news ? "mb-3" : "border-b border-zinc-500 mb-4 pb-4"}`}>
+                                    {section?.title?.t1 && <span className="text-black">{section?.title?.t1}</span>}{" "}
+                                    {section?.title?.t2 && <span className="text-orange-500">{section?.title?.t2}</span>}{" "}
+                                    {section?.title?.t3 && <span className="text-black">{section?.title?.t3}</span>}{" "}
+                                </h2>
+                            )}
+
+                            {section?.editorText && (
+                                <div>
+                                    <ParsedHtmlContent data={section?.editorText} />
+                                </div>
+                            )}
+                        </div>
+                    );
+
+                }
             })}
         </div>
     );
