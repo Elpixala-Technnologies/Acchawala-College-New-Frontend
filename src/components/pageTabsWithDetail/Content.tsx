@@ -30,7 +30,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
   // const toggleReadMore = () => {
   //   setIsExpanded((prev) => !prev);
   // };
-  console.log(selectedContent, "  selected selectedContent")
+  // console.log(selectedContent, "  selected selectedContent")
 
   return (
     <div className="w-full overflow-x-hidden md:[flex:8]">
@@ -82,7 +82,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
           };
           const videoGalleries = section?.videoGallery || [];
           const groupedVideos = groupVideosByCategory(videoGalleries)
-          console.log("each section is:", section);
+          // console.log("each section is:", section);
           // ==============================================
           return (
             <div

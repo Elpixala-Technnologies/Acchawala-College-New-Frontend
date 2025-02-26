@@ -139,7 +139,7 @@ export function parseHtmlToJson5(
 
 export function parseHtmlToJson6(htmlString: string | AnyNode | AnyNode[]): any[] {
     if (!htmlString) {
-        console.error("parseHtmlToJson6: Invalid input", htmlString);
+        // console.error("parseHtmlToJson6: Invalid input", htmlString);
         return [];
     }
 
@@ -153,9 +153,33 @@ export function parseHtmlToJson6(htmlString: string | AnyNode | AnyNode[]): any[
             return element.data.trim() ? element.data.trim() : null;
         }
 
-        if (["p", "h1", "h2", "h3"].includes(tagName)) {
+        if (["h1", "h2", "h3"].includes(tagName)) {
             const htmlContent = $(element).html();
-            return htmlContent ? { [tagName]: htmlContent.trim() } : null;
+            return htmlContent ? { ["h3"]: htmlContent.trim() } : null;
+        }
+        if (tagName?.match("p")) {
+            const htmlContent = $(element).html();
+            // const pContent = htmlContent?.trim();
+            // const pLength = pContent?.split(/\s+/).length;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlContent as string, 'text/html');
+            const pContent = doc.body.textContent?.trim();
+            const pLength = pContent?.split(/\s+/).length;
+
+            if (pContent?.match("Tip") || pContent?.match("Note")) return htmlContent ? { ["p"]: htmlContent.trim() } : null;
+
+            if (pLength && pLength > 1 && pLength < 12) {
+                const splitPContent: string[] = pContent?.split(" ") as string[]
+
+                // console.log(pContent, " this is hContent")
+
+                return htmlContent ? { ["h3"]: htmlContent?.trim() } : null;
+            } else if (pLength && pLength > 1) {
+                // console.log(pContent, " this is pContent")
+
+                return htmlContent ? { ["p"]: htmlContent.trim() } : null;
+            }
+
         }
 
         if (tagName === "li") {
@@ -182,9 +206,51 @@ export function parseHtmlToJson6(htmlString: string | AnyNode | AnyNode[]): any[
         let parsed = traverse(elem);
         if (parsed) result.push(parsed);
     });
+    console.log(result)
 
-    return result;
+    return processHeadings(result, result.length - 1, 0);
+    // return result
 }
+
+
+export function processHeadings(parsedJson: any[], idx: number, flag: number) {
+
+    if (!parsedJson[idx]?.h3 || flag === 0) {
+
+        if (idx === 0) {
+            return parsedJson;
+        }
+
+        if (parsedJson[idx]?.h3) {
+            flag = 1;
+        } else {
+            flag = 0;
+        }
+        return processHeadings(parsedJson, idx - 1, flag)
+    } else {
+
+        if (idx === 0) {
+            return parsedJson;
+        }
+
+        if (parsedJson[idx]?.h3 && parsedJson[idx - 1]?.h3) {
+            let jsonItem = {
+                h3: parsedJson[idx - 1]?.h3?.concat(": ".concat(parsedJson[idx]?.h3))
+            }
+
+            parsedJson[idx - 1] = jsonItem;
+
+            parsedJson?.splice(idx, 1);
+
+            return processHeadings(parsedJson, idx - 1, flag);
+
+        }
+        return processHeadings(parsedJson, idx - 1, flag);
+    }
+
+}
+
+
 
 export function getTextLengthByTag(htmlString: string, tag: string): number {
     if (!htmlString || !tag) return 0; // Handle empty input
