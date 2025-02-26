@@ -633,17 +633,17 @@ table th:first-child {
 }
 
 .styled-content-x { 
-  @apply !mt-5 important-py-1 sm:!px-2 !px-1 important-border-l-2 important-border-orange-500
+  @apply !mt-4 important-py-1 sm:!px-2 !px-1 important-border-l-2 important-border-orange-500
 }
 .styled-content-x * {
   @apply important-sm-text-2xl important-font-bold important-font-sans !text-lg !capitalize;
 }
 
 .styled-content-h0 { 
-  @apply  !mt-3 !pb-1.5 
+  @apply  !mt-4 !pb-1.5
 }
 .styled-content-h0 * {
-  @apply !capitalize !pb-1.5 border-b-2 !whitespace-nowrap !border-orange-500 sm:!text-2xl important-font-sans !text-xl !font-bold !text-gray-700;
+  @apply !capitalize !pb-1.5  !whitespace-nowrap  sm:!text-2xl important-font-sans !text-xl !font-bold !text-gray-700;
 
 }
 
@@ -652,6 +652,12 @@ table th:first-child {
 }
 .styled-content-p * {
   @apply important-text-black important-sm-text-5 !text-sm important-font-sans important-text-justify  ;
+}
+.styled-content-tip * {
+  @apply !text-red-500 !font-normal important-sm-text-5 !text-sm important-font-sans important-text-justify  ;
+}
+.styled-content-note * {
+  @apply !text-red-500 !font-normal important-sm-text-5 !text-sm important-font-sans important-text-justify  ;
 }
 
 .styled-content-a {
