@@ -19,7 +19,7 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
         return false
     }
 
-    // console.log("Expected an array but got:", typeof data, data);
+    console.log("Expected an array but got:", typeof data, data);
     return (
         <div className="bg-transparent w-full text-justify py-2">
             {data.map((section: any, idx) => {
@@ -36,12 +36,31 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
 
                             {section?.p && (
                                 (() => {
-                                    const doc = parser.parseFromString(section?.p, 'text/html');
+                                    const parser = new DOMParser();
+                                    const doc = parser.parseFromString(section?.p as string, 'text/html');
                                     const pContent = doc.body.textContent?.trim();
                                     const pLength = pContent?.split(/\s+/).length;
+                                    console.log(section?.p)
 
+                                    if (String(section?.p)?.match("Tip")) {
+                                        return (
+                                            <p
+                                                className="styled-content-p styled-content-tip bg-transparent"
+                                                dangerouslySetInnerHTML={{ __html: "*" + section?.p }}
+                                            />
+                                        )
+                                    }
 
-                                    if (pLength && pLength < 16) {
+                                    if (String(section?.p)?.match("Note")) {
+                                        return (
+                                            <p
+                                                className="styled-content-p styled-content-note bg-transparent"
+                                                dangerouslySetInnerHTML={{ __html: "*" + section?.p }}
+                                            />
+                                        )
+                                    }
+
+                                    if (pLength && pLength < 16 && pLength > 1) {
                                         return (
                                             <p
                                                 className="styled-content-p bg-transparent important-font-bold"
@@ -61,14 +80,11 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                                 (() => {
                                     const doc = parser.parseFromString(section?.h3, 'text/html');
                                     const pContent = doc.body.textContent?.trim();
-                                    // const pLength = pContent?.split(/\s+/).length;
-
-                                    // if (pLength && pLength > 1 && pLength <= 11) {
 
                                     if (data[(idx <= data.length - 2) ? idx + 1 : -1]?.h3) {
 
                                         return (
-                                            <div className='w-full overflow-x-scroll no-scrollbar whitespace-nowrap'>
+                                            <div className='w-full overflow-x-scroll no-scrollbar !whitespace-nowrap border-b-2 border-orange-500'>
                                                 <h3
                                                     className="styled-content-h0 bg-transparent"
                                                     dangerouslySetInnerHTML={{ __html: section?.h3 }}
@@ -103,13 +119,6 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                                         }
                                     }
                                 })()
-                            )}
-
-                            {(section?.h1) && (
-                                <h1
-                                    className="styled-content-h bg-transparent"
-                                    dangerouslySetInnerHTML={{ __html: section?.h1 }}
-                                />
                             )}
 
                             {section?.ul && (

@@ -21,7 +21,7 @@ import { IoIosCalendar } from "react-icons/io";
 import TypeHeadSearchBar from "../TypeHeadSearchBar/TypeHeadSearchBar";
 import ImageGallery from "./ImageGallery";
 import { FaRegNewspaper } from "react-icons/fa6";
-import { parseHtmlToJson5, parseHtmlToJson6 } from "@/lib/cheerio";
+import { parseHtmlToJson6 } from "@/lib/cheerio";
 import ParsedHtmlContent from "./parsedHtmlContent";
 
 export default function Content({ selectedContent, slug, breadCrumb }: any) {
