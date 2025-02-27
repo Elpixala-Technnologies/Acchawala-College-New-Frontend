@@ -95,7 +95,14 @@ export function parseHtmlToJson6(htmlString: string | AnyNode | AnyNode[]): any[
         if (tagName === "li") {
             let spans = $(element).find("span");
             if (spans.length >= 1) {
-                return { title: $(spans[0]).text().trim(), text: $(spans[1]).text().trim() };
+
+                const title = $(spans[0]).text().trim();
+                const text = $(spans[1]).text().trim()
+
+                if (!title || !text) {
+                    return
+                }
+                return { title, text };
             }
             return;
         }

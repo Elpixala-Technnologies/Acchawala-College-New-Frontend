@@ -158,24 +158,9 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
               )}
               {/* EditorText */}
               {section?.editorText &&
-                <>
-
-                  {/* <div
-                    className={`dangerouslySetInnerHTMLStyle mb-5 text-justify ${isExpanded ? "" : "line-clamp-4"}`}
-                    dangerouslySetInnerHTML={{ __html: section?.editorText }}
-                  /> */}
-                  <div>
-                    <ParsedHtmlContent data={section?.editorText} />
-                  </div>
-                  {/* {(articleLength > 665 || isMobile) && (
-                    <button
-                      onClick={toggleReadMore}
-                      className="relative right-0 mb-5 block w-full text-right font-medium hover:text-orange-500"
-                    >
-                      {isExpanded ? "Show Less" : "Read More"}
-                    </button>
-                  )} */}
-                </>
+                <div>
+                  <ParsedHtmlContent data={section?.editorText} />
+                </div>
               }
               {/* ReviewsText */}
               {section?.reviewsText && (

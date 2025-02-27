@@ -31,8 +31,8 @@ export default function Faqs({ data, className = "" }: any) {
                 <span className="text-lg font-medium">{faq?.question}</span>
                 <IoIosArrowDown
                   className={`transform text-xl transition-transform ${openFaq === faq?.id || (index === 0 && openFaq === null)
-                      ? "rotate-180"
-                      : ""
+                    ? "rotate-180"
+                    : ""
                     }`}
                 />
               </button>
@@ -40,8 +40,8 @@ export default function Faqs({ data, className = "" }: any) {
             {faq?.answer && (
               <div
                 className={`mt-2 transition-all duration-300 ease-in-out ${openFaq === faq?.id || (index === 0 && openFaq === null)
-                    ? "max-h-96"
-                    : "max-h-0 overflow-hidden"
+                  ? "max-h-96"
+                  : "max-h-0 overflow-hidden"
                   }`}
               >
                 <hr className="my-2" />
@@ -79,8 +79,8 @@ export function FaqsForDetailPage({ data, className = "" }: any) {
               <span className="text-lg font-medium">{faq?.question}</span>
               <IoIosArrowDown
                 className={`transform text-xl transition-transform ${openFaq === faq?.id || (index === 0 && openFaq === null)
-                    ? "rotate-180"
-                    : ""
+                  ? "rotate-180"
+                  : ""
                   }`}
               />
             </button>
@@ -88,12 +88,12 @@ export function FaqsForDetailPage({ data, className = "" }: any) {
           {faq?.answer && (
             <div
               className={`mt-2 transition-all duration-300 ease-in-out ${openFaq === faq?.id || (index === 0 && openFaq === null)
-                  ? "max-h-96"
-                  : "max-h-0 overflow-hidden"
+                ? "max-h-96"
+                : "max-h-0 overflow-hidden"
                 }`}
             >
               <hr className="my-2" />
-              <p className="my-3 text-justify text-zinc-500">
+              <p className="my-3 text-left text-zinc-500 sm:!text-lg !text-sm ">
                 <TextWithLineBreak text={faq?.answer} />
               </p>
             </div>

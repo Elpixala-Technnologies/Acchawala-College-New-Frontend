@@ -10,7 +10,7 @@ export default function TimelineList({ data }: any) {
   };
   return (
     <div className="mb-5 flex w-full items-stretch gap-x-3 pt-5">
-      <div className="mx-4 w-[2px] border-r-2 border-zinc-500"></div>
+      <div className="mr-4 md:ml-2 ml-0 w-[2px] border-r-2 border-zinc-500"></div>
       <div className="flex w-full flex-col gap-4 pt-0">
         {data?.map((item: any, index: number) => (
           <div
@@ -22,7 +22,7 @@ export default function TimelineList({ data }: any) {
           >
             <button
               onClick={() => toggle(index)}
-              className="flex w-full items-center justify-between text-left"
+              className="flex w-full items-center justify-between text-left sm:text-lg text-sm"
             >
               <span className="pb-0 font-bold text-orange-500">
                 {item?.title}
@@ -38,7 +38,7 @@ export default function TimelineList({ data }: any) {
               className={`mt-1 transition-all duration-300 ease-in-out ${isOpen === index || (index === 0 && isOpen === null)
                 ? "max-h-96"
                 : "max-h-0 overflow-hidden"
-                }`}
+                } `}
             >
               {item?.text && (
                 <div
@@ -85,13 +85,15 @@ export function TimelineListTwo({ data, title }: any) {
         className="styled-content-p bg-transparent"
         dangerouslySetInnerHTML={{ __html: title }}
       />
-      <div className="mx-4 w-[2px] border-r-2 border-zinc-500"></div>
+      <div className="mr-4 md:ml-2 ml-0 w-[2px] border-r-2 border-zinc-500"></div>
 
       <div className="flex w-full flex-col gap-4 pt-0">
 
         {Array.isArray(data) && data?.map((item: any, index: number) => {
+
           const text = item?.title?.replace(item?.text, "").replace(":", "").trim();
           // console.log(text)
+
           if (item?.text === item?.title) {
             return (
               <div
