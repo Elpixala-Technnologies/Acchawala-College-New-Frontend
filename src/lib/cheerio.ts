@@ -54,21 +54,33 @@ export function parseHtmlToJson6(htmlString: string | AnyNode | AnyNode[]): any[
 
 
             if (htmlContent?.match("<br>")) {
-                let splitHtml = htmlContent.split("<br>")
-                let firstPart = splitHtml[0]
+                const splitHtml = htmlContent.split("<br>")
+                const firstPart = splitHtml[0]
 
                 let newObject: any = {
-                    p: firstPart,
+                    p: null,
                     ul: []
                 }
-
-                for (let i = 1; i < splitHtml.length - 1; i++) {
-                    if ($(splitHtml[i]).text().trim().length < 1) {
-                        continue;
+                if ($(firstPart).text().trim().match(":")) {
+                    newObject = {
+                        p: firstPart,
+                        ul: []
                     }
-                    newObject?.ul?.push({ title: $(splitHtml[i]).text().trim(), text: $(splitHtml[i]).text().trim() })
+                    for (let i = 1; i < splitHtml.length - 1; i++) {
+                        newObject?.ul?.push({ title: $(splitHtml[i]).text().trim(), text: $(splitHtml[i]).text().trim() })
+                    }
+                    return newObject
+                } else {
+                    newObject = {
+                        p: null,
+                        ul: []
+                    }
+                    for (let i = 0; i < splitHtml.length - 1; i++) {
+                        newObject?.ul?.push({ title: $(splitHtml[i]).text().trim(), text: $(splitHtml[i]).text().trim() })
+                    }
+                    return newObject
                 }
-                return newObject
+                // return htmlContent ? { ["p"]: htmlContent.trim() } : null;
             }
 
             if (pContent?.match("Tip") || pContent?.match("Note")) return htmlContent ? { ["p"]: htmlContent.trim() } : null;
@@ -82,7 +94,7 @@ export function parseHtmlToJson6(htmlString: string | AnyNode | AnyNode[]): any[
 
         if (tagName === "li") {
             let spans = $(element).find("span");
-            if (spans.length >= 2) {
+            if (spans.length >= 1) {
                 return { title: $(spans[0]).text().trim(), text: $(spans[1]).text().trim() };
             }
             return;

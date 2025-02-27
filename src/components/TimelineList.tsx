@@ -57,13 +57,21 @@ export default function TimelineList({ data }: any) {
 
 
 export function TimelineListTwo({ data, title }: any) {
-  if (!Array.isArray(data)) {
+  // t and false
+  // f and t
+  if (!Array.isArray(data) && (!data?.title || !data?.text)) {
     console.error("Expected an array but got:", typeof data, data);
     return <p className="text-sm">Invalid data format</p>;
   }
+
+  if (data?.title && data?.text) {
+    const arrayData = [{ title: data?.title, text: data?.text }];
+    data = arrayData;
+  }
+
   const [isOpen, setIsOpen] = useState(null);
 
-  // console.log(data)
+  console.log(data)
   const toggle = (id: any) => {
     setIsOpen(isOpen === id ? null : id);
   };
@@ -81,7 +89,7 @@ export function TimelineListTwo({ data, title }: any) {
 
       <div className="flex w-full flex-col gap-4 pt-0">
 
-        {data?.map((item: any, index: number) => {
+        {Array.isArray(data) && data?.map((item: any, index: number) => {
           const text = item?.title?.replace(item?.text, "").replace(":", "").trim();
           // console.log(text)
           if (item?.text === item?.title) {
