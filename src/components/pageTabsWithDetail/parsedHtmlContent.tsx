@@ -30,7 +30,7 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                 const pContent = doc.body.textContent?.trim();
                 const pLength = pContent?.split(/\s+/).length;
 
-                if ((Number(pLength) > 1) || section?.p || section?.h3 || section?.h1 || section?.ul || section?.ul?.ul || section?.ul?.p || section?.ol || section?.div?.figure?.table || section?.p?.image || section?.title || section?.editorText) {
+                if ((Number(pLength) > 1) || section?.p || section?.h3 || section?.h1 || section?.ul || section?.ul?.ul || section?.ol || section?.div?.figure?.table || section?.p?.image || section?.title || section?.editorText) {
                     return (
                         <div key={idx} className='p-[0.1px]'>
 
@@ -122,21 +122,21 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                             )}
 
                             {section?.ul && (
-                                <div className="text-xl font-bold mt-3 mb-0">
+                                <div className="text-xl font-bold mt-3 mb-0 b">
                                     <TimelineListTwo data={section?.ul} />
                                 </div>
                             )}
                             {section?.ul?.ul && (
-                                <div className="text-xl font-bold mt-3 mb-0">
+                                <div className="text-xl font-bold mt-3 mb-0 a">
                                     <TimelineListTwo data={section?.ul} title={section?.ul?.p} />
                                 </div>
                             )}
 
-                            {section?.ol && (
+                            {/* {section?.ol && (
                                 <div className="text-xl font-bold mt-3 mb-0">
                                     <TimelineListTwo data={section?.ol} />
                                 </div>
-                            )}
+                            )} */}
 
                             {section?.div?.figure?.table && (
                                 <div className='overflow-x-scroll scroll-container '>

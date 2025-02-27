@@ -633,14 +633,14 @@ table th:first-child {
 }
 
 .styled-content-x { 
-  @apply !mt-4 important-py-1 sm:!px-2 !px-1 important-border-l-2 important-border-orange-500
+  @apply !mt-8 important-py-1 sm:!px-2 !px-1 important-border-l-2 important-border-orange-500
 }
 .styled-content-x * {
   @apply important-sm-text-2xl important-font-bold important-font-sans !text-lg !capitalize;
 }
 
 .styled-content-h0 { 
-  @apply  !mt-4 !pb-1.5
+  @apply !mt-8 !pb-1.5
 }
 .styled-content-h0 * {
   @apply !capitalize !pb-1.5  !whitespace-nowrap  sm:!text-2xl important-font-sans !text-xl !font-bold !text-gray-700;
@@ -672,6 +672,12 @@ table th:first-child {
 }
 .styled-content-table colgroup col{
   @apply !min-w-[350px] !w-[350px]  !table-fixed
+}
+.styled-content-table table tbody tr {
+  @apply !py-0 !h-fit
+}
+.styled-content-table table tbody tr td {
+  @apply !py-1.5 !px-1 !my-0 
 }
 .styled-content-table table tbody tr:first-of-type * {
   @apply important-bg-orange-500 important-text-white important-text-center;
