@@ -30,7 +30,7 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                 const pContent = doc.body.textContent?.trim();
                 const pLength = pContent?.split(/\s+/).length;
 
-                if ((Number(pLength) > 1) || section?.p || section?.h3 || section?.h1 || section?.ul || section?.ol || section?.div?.figure?.table || section?.p?.image || section?.title || section?.editorText) {
+                if ((Number(pLength) > 1) || section?.p || section?.h3 || section?.h1 || section?.ul || section?.ul?.ul || section?.ul?.p || section?.ol || section?.div?.figure?.table || section?.p?.image || section?.title || section?.editorText) {
                     return (
                         <div key={idx} className='p-[0.1px]'>
 
@@ -84,7 +84,7 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                                     if (data[(idx <= data.length - 2) ? idx + 1 : -1]?.h3) {
 
                                         return (
-                                            <div className='w-full overflow-x-scroll no-scrollbar !whitespace-nowrap border-b-2 border-orange-500'>
+                                            <div className='max-w-fit overflow-x-scroll no-scrollbar !whitespace-nowrap border-b-2 border-orange-500'>
                                                 <h3
                                                     className="styled-content-h0 bg-transparent"
                                                     dangerouslySetInnerHTML={{ __html: section?.h3 }}
@@ -124,6 +124,11 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                             {section?.ul && (
                                 <div className="text-xl font-bold mt-3 mb-0">
                                     <TimelineListTwo data={section?.ul} />
+                                </div>
+                            )}
+                            {section?.ul?.ul && (
+                                <div className="text-xl font-bold mt-3 mb-0">
+                                    <TimelineListTwo data={section?.ul} title={section?.ul?.p} />
                                 </div>
                             )}
 

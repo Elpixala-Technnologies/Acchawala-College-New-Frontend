@@ -56,7 +56,7 @@ export default function TimelineList({ data }: any) {
 
 
 
-export function TimelineListTwo({ data }: any) {
+export function TimelineListTwo({ data, title }: any) {
   if (!Array.isArray(data)) {
     console.error("Expected an array but got:", typeof data, data);
     return <p className="text-sm">Invalid data format</p>;
@@ -73,6 +73,10 @@ export function TimelineListTwo({ data }: any) {
   };
   return (
     <div className=" flex w-full items-stretch gap-x-3">
+      <p
+        className="styled-content-p bg-transparent"
+        dangerouslySetInnerHTML={{ __html: title }}
+      />
       <div className="mx-4 w-[2px] border-r-2 border-zinc-500"></div>
 
       <div className="flex w-full flex-col gap-4 pt-0">
