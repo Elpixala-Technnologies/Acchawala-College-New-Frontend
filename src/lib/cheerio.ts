@@ -53,12 +53,23 @@ export function parseHtmlToJson6(htmlString: string | AnyNode | AnyNode[]): any[
             const pLength = pContent?.split(/\s+/).length;
 
 
-            // if (htmlContent?.match("<br>")) {
-            //     let firstPart = htmlContent.split("<br>")[0];
-            //     let secondPart = htmlContent.split("<br>").slice(1).join("<br>")
+            if (htmlContent?.match("<br>")) {
+                let splitHtml = htmlContent.split("<br>")
+                let firstPart = splitHtml[0]
 
+                let newObject: any = {
+                    p: firstPart,
+                    ul: []
+                }
 
-            // }
+                for (let i = 1; i < splitHtml.length - 1; i++) {
+                    if ($(splitHtml[i]).text().trim().length < 1) {
+                        continue;
+                    }
+                    newObject?.ul?.push({ title: $(splitHtml[i]).text().trim(), text: $(splitHtml[i]).text().trim() })
+                }
+                return newObject
+            }
 
             if (pContent?.match("Tip") || pContent?.match("Note")) return htmlContent ? { ["p"]: htmlContent.trim() } : null;
 
