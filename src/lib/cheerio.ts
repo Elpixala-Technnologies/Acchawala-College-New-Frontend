@@ -31,6 +31,7 @@ export function parseHtmlToJson6(htmlString: string | AnyNode | AnyNode[]): any[
 
     const $ = cheerio.load(htmlString.toString());
 
+
     function traverse(element: any) {
         let tagName = element.tagName ? String(element.tagName).toLowerCase() : "";
         let children: any[] = [];
@@ -99,17 +100,20 @@ export function parseHtmlToJson6(htmlString: string | AnyNode | AnyNode[]): any[
                 const title = $(spans[0]).text().trim();
                 const text = $(spans[1]).text().trim()
 
+                if (title.match(":")) {
+                    return { title, text };
+                }
                 if (!title || !text) {
                     return
                 }
-                return { title, text };
+                // return { title, text };
+                return { title, text: title };
             }
             return;
         }
 
         if (tagName === "table") return { table: $.html(element) };
         if (tagName === "img") return { image: $.html(element) };
-        // if (tagName === "a") return { link: $.html(element) };
 
         $(element).contents().each((_, child) => {
             let childData = traverse(child);
@@ -126,8 +130,14 @@ export function parseHtmlToJson6(htmlString: string | AnyNode | AnyNode[]): any[
     });
     console.log(result)
 
+    if (result[result.length - 1]?.h3) {
+        const currentTagContent = result[result.length - 1]?.h3
+        result.pop();
+        result.push({ p: currentTagContent });
+    }
+
     return processHeadings(result, result.length - 1, 0);
-    // return result
+
 }
 
 
