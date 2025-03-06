@@ -12,22 +12,22 @@ import Image from 'next/image'
 import { NewsAndUpdatesSection, ReviewsAndRatingsSection } from './Content'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
-export default function CollapsibleSection({ section, isExpanded, groupedVideos, breadCrumb, slug, groupedImages }: any) {
+export default function CollapsibleSection({ section, isExpanded, groupedVideos, breadCrumb, slug, groupedImages, isTitle = true }: any) {
     const [isOpen, setIsOpen] = useState(true)
 
-
+    console.log(section?.title)
     return (
         <div
             className={`mt-5 w-full md:rounded-2xl sm:rounded-lg rounded-none  md:min-w-[550px] sm:p-5 p-3 ${section?.title ? "bg-white" : "bg-transparent hidden"}`}
         >
             {/* Title */}
-            {section?.title && (
+            {section?.title && (section?.title?.t1 || section?.title?.t2 || section?.title?.t3) && (
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     className='w-full flex items-center justify-between'
                 >
                     <h1
-                        id={section?.title?.t1.trim() + " " + section?.title?.t2.trim() + " " + section?.title?.t3.trim()}
+                        id={section?.title?.t1?.trim() + " " + section?.title?.t2?.trim() + " " + section?.title?.t3?.trim()}
                         className={`md:text-2xl text-xl text-left font-bold capitalize ${isOpen ? "border-b  pb-3  mb-1 " : "border-none"} border-black ${section?.news ? "" : "border-b border-zinc-500"}`}
                     >
                         {section?.title?.t1 && (
@@ -44,14 +44,14 @@ export default function CollapsibleSection({ section, isExpanded, groupedVideos,
                     </h1>
 
                     <div className='text-xl'>
-                        {isOpen ?
+                        {isOpen && section?.title ?
                             <IoIosArrowDown /> :
                             <IoIosArrowUp />}
                     </div>
                 </button>
 
             )}
-            {isOpen && section?.title && <>
+            {isOpen && <>
                 {/* Author */}
                 {section?.author && section?.author?.data?.attributes?.name && (
                     <div className="sm:mb-8 mb-4 flex items-center gap-x-2">
