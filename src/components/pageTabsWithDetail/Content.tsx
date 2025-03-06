@@ -52,7 +52,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
           className="flex items-center justify-between w-full"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <h1 className="md:text-2xl text-xl font-bold border-b border-black pb-3 mb-1" >
+          <h1 className={`md:text-2xl text-xl font-bold ${isOpen ? "border-b  pb-3  mb-1 " : "border-none"} border-black`} >
             Table of <span className="text-orange-500">Content</span>
           </h1>
           <div className='text-xl'>
@@ -92,13 +92,13 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
             <div className="">
               {noOfTitles === titles.length ?
                 <button
-                  className="mt-2 pl-2 font-bold text-orange-600 hover:underline flex items-center gap-1"
+                  className="mt-2 pl-2 font-bold text-orange-600 hover:underline flex items-center gap-1 text-sm"
                   onClick={() => setNoOfTitles(6)}>
                   Show less  < FaLongArrowAltRight className="h-full" />
                 </button>
                 :
                 <button
-                  className="mt-2 pl-2 font-bold text-orange-600 hover:underline flex items-center gap-1"
+                  className="mt-2 pl-2 font-bold text-orange-600 hover:underline flex items-center gap-1 text-sm"
                   onClick={() => setNoOfTitles(titles.length)}>
                   +{titles.length - 6} Load more < FaLongArrowAltRight className="h-full" />
                 </button>}
