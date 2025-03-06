@@ -13,7 +13,7 @@ import { NewsAndUpdatesSection, ReviewsAndRatingsSection } from './Content'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 export default function CollapsibleSection({ section, isExpanded, groupedVideos, breadCrumb, slug, groupedImages }: any) {
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(true)
 
 
     return (
@@ -28,7 +28,7 @@ export default function CollapsibleSection({ section, isExpanded, groupedVideos,
                 >
                     <h1
                         id={section?.title?.t1.trim() + " " + section?.title?.t2.trim() + " " + section?.title?.t3.trim()}
-                        className={`md:text-2xl text-xl text-left font-bold capitalize ${section?.news ? "mb-3" : "border-b border-zinc-500 mb-2 pb-4"}`}
+                        className={`md:text-2xl text-xl text-left font-bold capitalize ${isOpen ? "border-b  pb-3  mb-1 " : "border-none"} border-black ${section?.news ? "" : "border-b border-zinc-500"}`}
                     >
                         {section?.title?.t1 && (
                             <span className="text-black">{section?.title?.t1}</span>
