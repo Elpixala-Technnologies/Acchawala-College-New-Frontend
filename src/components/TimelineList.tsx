@@ -71,7 +71,7 @@ export function TimelineListTwo({ data, title }: any) {
 
   const [isOpen, setIsOpen] = useState(null);
 
-  console.log(data)
+  // console.log(data)
   const toggle = (id: any) => {
     setIsOpen(isOpen === id ? null : id);
   };
