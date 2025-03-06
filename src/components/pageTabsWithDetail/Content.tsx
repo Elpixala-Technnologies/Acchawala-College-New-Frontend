@@ -3,20 +3,109 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { StarRating } from "../StarRating";
-import { FaStar } from "react-icons/fa";
+import { FaLongArrowAltRight, FaStar } from "react-icons/fa";
 import { formatDate } from "@/utils/customText";
 import collegeIcon from "@/assets/icons/College.png"
-import { IoIosCalendar } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp, IoIosCalendar } from "react-icons/io";
 
 import { FaRegNewspaper } from "react-icons/fa6";
 import CollapsibleSection from "./CollapsibleSection";
+import { TbTriangleFilled } from "react-icons/tb";
 
 export default function Content({ selectedContent, slug, breadCrumb }: any) {
   const [isExpanded, setIsExpanded] = useState(true);
-  // console.log(selectedContent?.sections, "  selected selectedContent")
+  const [titles, setTitles] = useState<any[]>([]);
+  const [isOpen, setIsOpen] = useState(true);
+  const [noOfTitles, setNoOfTitles] = useState(6);
+
+  console.log(selectedContent, "  selected selectedContent")
+  const scrollToElementById = (id: string) => {
+    if (typeof document === "undefined") return; // Prevents issues in Next.js SSR
+
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "center" });
+    } else {
+      console.warn(`Element with ID "${id}" not found`);
+    }
+  };
+  function extractTitles(sections: any) {
+    let titles: { title: any; }[] = []
+
+    sections?.forEach((item: any) => {
+      if (!item?.title) return
+      titles.push({ title: item?.title })
+    })
+    return titles;
+  }
+
+  useEffect(() => {
+    setTitles(extractTitles(selectedContent?.sections))
+  }, [selectedContent?.sections])
 
   return (
     <div className="w-full overflow-x-hidden md:[flex:8]">
+      <div
+        className={`mt-5 w-full md:rounded-2xl sm:rounded-lg rounded-none  md:min-w-[550px] bg-white sm:p-5 p-3`}
+      >
+        <button
+          className="flex items-center justify-between w-full"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <h1 className="md:text-2xl text-xl font-bold border-b border-black pb-3 mb-1" >
+            Table of <span className="text-orange-500">Content</span>
+          </h1>
+          <div className='text-xl'>
+            {isOpen ?
+              <IoIosArrowDown /> :
+              <IoIosArrowUp />}
+          </div>
+        </button>
+
+        {isOpen &&
+          <>
+            {
+              titles?.slice(0, noOfTitles).map(({ title }: any, idx: number) => {
+                const titleText = title?.t1.trim() + " " + title?.t2.trim() + " " + title?.t3.trim()
+                if (!titleText.trim().length) return
+                return (
+                  <div className="flex items-center justify-start gap-2 mt-2 ml-1 relative md:py-1 py-1.5 rounded-sm bg-orange-200 pl-2" onClick={() => scrollToElementById(titleText)}>
+                    <TbTriangleFilled className="text-orange-500 text-sm rotate-90" />
+
+                    <h1 key={idx} className=" text-blue-700 font-[500] md:text-lg text-sm cursor-pointer hover:underline">
+                      {title?.t1 && (
+                        <span className="">{title?.t1}</span>
+                      )}{" "}
+                      {title?.t2 && (
+                        <span className="">
+                          {title?.t2}
+                        </span>
+                      )}{" "}
+                      {title?.t3 && (
+                        <span className="">{title?.t3}</span>
+                      )}{" "}
+                    </h1>
+                  </div>
+                )
+              })}
+
+            <div className="">
+              {noOfTitles === titles.length ?
+                <button
+                  className="mt-2 pl-2 font-bold text-orange-600 hover:underline flex items-center gap-1"
+                  onClick={() => setNoOfTitles(6)}>
+                  Show less  < FaLongArrowAltRight className="h-full" />
+                </button>
+                :
+                <button
+                  className="mt-2 pl-2 font-bold text-orange-600 hover:underline flex items-center gap-1"
+                  onClick={() => setNoOfTitles(titles.length)}>
+                  +{titles.length - 6} Load more < FaLongArrowAltRight className="h-full" />
+                </button>}
+            </div>
+          </>}
+
+      </div>
       {selectedContent &&
         selectedContent?.sections?.length > 0 &&
         selectedContent?.sections?.map((section: any, index: any) => {

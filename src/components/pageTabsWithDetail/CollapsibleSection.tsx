@@ -13,12 +13,12 @@ import { NewsAndUpdatesSection, ReviewsAndRatingsSection } from './Content'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 export default function CollapsibleSection({ section, isExpanded, groupedVideos, breadCrumb, slug, groupedImages }: any) {
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
 
 
     return (
         <div
-            className={`mt-5 w-full md:rounded-2xl sm:rounded-lg rounded-none  md:min-w-[550px] ${section?.news ? "bg-transparent" : "bg-white sm:p-5 p-3"}`}
+            className={`mt-5 w-full md:rounded-2xl sm:rounded-lg rounded-none  md:min-w-[550px] sm:p-5 p-3 ${section?.title ? "bg-white" : "bg-transparent hidden"}`}
         >
             {/* Title */}
             {section?.title && (
@@ -26,9 +26,9 @@ export default function CollapsibleSection({ section, isExpanded, groupedVideos,
                     onClick={() => setIsOpen(!isOpen)}
                     className='w-full flex items-center justify-between'
                 >
-                    <h2
-
-                        className={`text-2xl font-bold capitalize ${section?.news ? "mb-3" : "border-b border-zinc-500 mb-2 pb-4"}`}
+                    <h1
+                        id={section?.title?.t1.trim() + " " + section?.title?.t2.trim() + " " + section?.title?.t3.trim()}
+                        className={`md:text-2xl text-xl text-left font-bold capitalize ${section?.news ? "mb-3" : "border-b border-zinc-500 mb-2 pb-4"}`}
                     >
                         {section?.title?.t1 && (
                             <span className="text-black">{section?.title?.t1}</span>
@@ -41,7 +41,7 @@ export default function CollapsibleSection({ section, isExpanded, groupedVideos,
                         {section?.title?.t3 && (
                             <span className="text-black">{section?.title?.t3}</span>
                         )}{" "}
-                    </h2>
+                    </h1>
 
                     <div className='text-xl'>
                         {isOpen ?
@@ -51,7 +51,7 @@ export default function CollapsibleSection({ section, isExpanded, groupedVideos,
                 </button>
 
             )}
-            {isOpen && <>
+            {isOpen && section?.title && <>
                 {/* Author */}
                 {section?.author && section?.author?.data?.attributes?.name && (
                     <div className="sm:mb-8 mb-4 flex items-center gap-x-2">
