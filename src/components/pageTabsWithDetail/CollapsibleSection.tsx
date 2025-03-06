@@ -24,26 +24,29 @@ export default function CollapsibleSection({ section, isExpanded, groupedVideos,
             {section?.title && (section?.title?.t1 || section?.title?.t2 || section?.title?.t3) && (
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className='w-full flex items-center justify-between'
+                    className='w-full flex items-center justify-between gap-1'
                 >
-                    <h1
-                        id={section?.title?.t1?.trim() + " " + section?.title?.t2?.trim() + " " + section?.title?.t3?.trim()}
-                        className={`md:text-2xl text-xl text-left font-bold capitalize ${isOpen ? "border-b  pb-3  mb-1 " : "border-none"} border-black ${section?.news ? "" : "border-b border-zinc-500"}`}
-                    >
-                        {section?.title?.t1 && (
-                            <span className="text-black">{section?.title?.t1}</span>
-                        )}{" "}
-                        {section?.title?.t2 && (
-                            <span className="text-orange-500">
-                                {section?.title?.t2}
-                            </span>
-                        )}{" "}
-                        {section?.title?.t3 && (
-                            <span className="text-black">{section?.title?.t3}</span>
-                        )}{" "}
-                    </h1>
+                    <div className={`overflow-x-scroll no-scrollbar ${isOpen ? "border-b pb-3" : "border-none"} border-black `}>
+                        <h1
+                            id={section?.title?.t1?.trim() + " " + section?.title?.t2?.trim() + " " + section?.title?.t3?.trim()}
+                            className={`md:text-2xl text-xl text-left w-full font-bold capitalize whitespace-nowrap ${section?.news ? "" : ""}`}
+                        >
+                            {section?.title?.t1 && (
+                                <span className="text-black">{section?.title?.t1}</span>
+                            )}{" "}
+                            {section?.title?.t2 && (
+                                <span className="text-orange-500">
+                                    {section?.title?.t2}
+                                </span>
+                            )}{" "}
+                            {section?.title?.t3 && (
+                                <span className="text-black">{section?.title?.t3}</span>
+                            )}{" "}
+                        </h1>
+                    </div>
 
-                    <div className='text-xl'>
+
+                    <div className='sm:text-xl text-sm flex items-center justify-center'>
                         {isOpen && section?.title ?
                             <IoIosArrowDown /> :
                             <IoIosArrowUp />}
