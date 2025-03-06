@@ -128,7 +128,6 @@ export function parseHtmlToJson6(htmlString: string | AnyNode | AnyNode[]): any[
         let parsed = traverse(elem);
         if (parsed) result.push(parsed);
     });
-    console.log(result)
 
     if (result[result.length - 1]?.h3) {
         const currentTagContent = result[result.length - 1]?.h3
