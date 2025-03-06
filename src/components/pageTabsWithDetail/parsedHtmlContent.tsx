@@ -19,7 +19,7 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
         return false
     }
 
-    console.log("Expected an array but got:", typeof data, data);
+    // console.log("Expected an array but got:", typeof data, data);
     return (
         <div className="bg-transparent w-full text-justify py-2">
             {data.map((section: any, idx) => {
@@ -40,7 +40,6 @@ export default function ParsedHtmlContent({ data = [] }: { data: any }) {
                                     const doc = parser.parseFromString(section?.p as string, 'text/html');
                                     const pContent = doc.body.textContent?.trim();
                                     const pLength = pContent?.split(/\s+/).length;
-                                    console.log(section?.p)
 
                                     if (String(section?.p)?.match("Tip")) {
                                         return (
