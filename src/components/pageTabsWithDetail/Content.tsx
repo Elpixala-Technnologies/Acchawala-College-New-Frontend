@@ -64,10 +64,11 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
 
         {isOpen &&
           <>
-            {
-              titles?.slice(0, noOfTitles).map(({ title }: any, idx: number) => {
-                const titleText = title?.t1.trim() + " " + title?.t2.trim() + " " + title?.t3.trim()
-                if (!titleText.trim().length) return
+            {titles?.slice(0, noOfTitles).map(({ title }: any, idx: number) => {
+              const titleText = title?.t1?.trim() + " " + title?.t2?.trim() + " " + title?.t3?.trim()
+              if (!titleText.trim()) return
+
+              if (title?.t1 || title?.t2 || title?.t3) {
                 return (
                   <div className="flex items-center justify-start gap-2 mt-2 ml-1 relative md:py-1 py-1.5 rounded-sm bg-orange-200 pl-2" onClick={() => scrollToElementById(titleText)}>
                     <TbTriangleFilled className="text-orange-500 text-sm rotate-90" />
@@ -87,7 +88,9 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
                     </h1>
                   </div>
                 )
-              })}
+              }
+              return
+            })}
 
             <div className="">
               {noOfTitles === titles.length ?
@@ -159,6 +162,7 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
               breadCrumb={breadCrumb}
               slug={slug}
               groupedImages={groupedImages}
+              isTitle={false}
             />
           );
         }
