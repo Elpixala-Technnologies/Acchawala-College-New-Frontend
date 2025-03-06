@@ -70,10 +70,12 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
 
               if (title?.t1 || title?.t2 || title?.t3) {
                 return (
-                  <div className="flex items-center justify-start gap-2 mt-2 ml-1 relative md:py-1 py-1.5 rounded-sm bg-orange-200 pl-2" onClick={() => scrollToElementById(titleText)}>
-                    <TbTriangleFilled className="text-orange-500 text-sm rotate-90" />
+                  <div className="flex items-center justify-start gap-2 mt-2 ml-1 relative md:py-1 py-1.5 rounded-sm overflow-x-scroll no-scrollbar bg-orange-200 pl-2" onClick={() => scrollToElementById(titleText)}>
+                    <div>
+                      <TbTriangleFilled className="text-orange-500 text-sm rotate-90" />
+                    </div>
 
-                    <h1 key={idx} className=" text-blue-700 font-[500] md:text-lg text-sm cursor-pointer hover:underline">
+                    <h1 key={idx} className=" text-blue-700 font-[500] md:text-lg text-sm cursor-pointer hover:underline whitespace-nowrap ">
                       {title?.t1 && (
                         <span className="">{title?.t1}</span>
                       )}{" "}
@@ -162,7 +164,6 @@ export default function Content({ selectedContent, slug, breadCrumb }: any) {
               breadCrumb={breadCrumb}
               slug={slug}
               groupedImages={groupedImages}
-              isTitle={false}
             />
           );
         }

@@ -12,7 +12,7 @@ import Image from 'next/image'
 import { NewsAndUpdatesSection, ReviewsAndRatingsSection } from './Content'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
-export default function CollapsibleSection({ section, isExpanded, groupedVideos, breadCrumb, slug, groupedImages, isTitle = true }: any) {
+export default function CollapsibleSection({ section, isExpanded, groupedVideos, breadCrumb, slug, groupedImages }: any) {
     const [isOpen, setIsOpen] = useState(true)
 
     console.log(section?.title)
