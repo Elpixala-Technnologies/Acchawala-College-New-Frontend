@@ -149,6 +149,106 @@ export const getUserData = gql`
   }
 `;
 
+export const getUserData2 = gql`
+ query getUserData($ID: ID!){
+  usersPermissionsUser(id: $ID) {
+    data {
+      id
+      attributes {
+        username
+        email
+        dob
+        avatar{
+          data{
+            id
+            attributes{
+              url
+            }
+          }
+        }
+        course {
+          data {
+            id
+            attributes {
+              breadCrumb
+            }
+          }
+        }
+        city {
+          data {
+            id
+            attributes {
+              city
+            }
+          }
+        }
+        state {
+          data {
+            id
+            attributes {
+              state
+            }
+          }
+        }
+        phoneNumber
+        gender
+        GraduationEducationalDetails {
+          id
+          institutionName
+          passingYear
+          course
+          gradingSystem
+          percentageOrGrades
+          location
+        }
+        twelfthEducationalDetails {
+          id
+          schoolName
+          location
+          passingYear
+          stream
+          gradingSystem
+          percentageOrGrades
+        }
+        appearingEntranceExam
+        collegesApplying(sort: "priority:asc") {
+          id
+          collegeApplied {
+            data {
+              id
+              attributes {
+                collegeName
+              }
+            }
+          }
+          status
+          priority
+        }
+        workExperience {
+          id
+          companyName
+          jobPosition
+          from
+          to
+        }
+        studyAbroad(sort: "priority:asc") {
+          id
+          collegeApplied {
+            data {
+              id
+              attributes {
+                collegeName
+              }
+            }
+          }
+          status
+          priority
+        }
+      }
+    }
+  }
+}`
+
 export const getAllCollegesByName = gql`
   query getAllCollegesByName {
     colleges {

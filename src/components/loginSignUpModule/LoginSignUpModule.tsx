@@ -23,7 +23,7 @@ export function LoginSignUpModule({
 
   return (
     <section
-      className="fixed -top-5 left-0 z-50 flex h-screen w-full items-center justify-center bg-zinc-950 bg-opacity-70 max-sm:mt-20 max-sm:h-[90vh]"
+      className="fixed -top-8 left-0 z-50 flex h-screen w-full items-center justify-center bg-zinc-950 bg-opacity-70 max-sm:mt-20 max-sm:h-[90vh]"
       onClick={handleOverlayClick}
     >
       {/* Module  */}

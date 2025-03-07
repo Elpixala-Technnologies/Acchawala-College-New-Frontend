@@ -708,14 +708,32 @@ table th:first-child {
 }
 
 
-/* 
-.styled-content-table table {
-  text-align: justify;
-  width: 100%;
-  font-style: normal;
-  font-size: 17px;
+select {
+  -webkit-appearance: none; /* Remove default styling on WebKit (Safari, iOS) */
+  -moz-appearance: none;    /* Remove default styling on Firefox */
+  appearance: none;         /* Standard property */
+  
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
 }
-.styled-content-table table tbody tr:first-of-type {
-  background-color: #ff9028;
-  color: white;
-} */
+
+/* Add a down-arrow icon */
+select {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  padding-right: 30px;
+}
+
+/* Fix for Safari (Ensures correct box-sizing) */
+select::-webkit-inner-spin-button,
+select::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
