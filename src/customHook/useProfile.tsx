@@ -18,6 +18,8 @@ const useUserData = () => {
     },
     skip: !userId, // Skip query if userId is not available
   });
+  console.log(userId, jwt)
+  console.log(data)
 
   return {
     data: data?.usersPermissionsUser?.data,

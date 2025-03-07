@@ -54,127 +54,250 @@ export const footer = {
     youtube: "https://www.youtube.com/c/collegedakhla",
   },
   copyrightText: "Copyrights © 2024 collegedakhla. All rights reserved.",
-  list1: {
-    title: "Products",
-    links: [
-      {
-        id: 1,
-        label: "Feature",
-        href: "/",
-      },
-      {
-        id: 2,
-        label: "Pricing",
-        href: "/pricing",
-      },
-      {
-        id: 3,
-        label: "Case Studies",
-        href: "/case-studies",
-      },
-      {
-        id: 4,
-        label: "Reviews",
-        href: "/reviews",
-      },
-      {
-        id: 5,
-        label: "Updates",
-        href: "/updates",
-      },
-    ],
-  },
-  list2: {
-    title: "Company",
-    links: [
-      {
-        id: 1,
-        label: "About",
-        href: "/about",
-      },
-      {
-        id: 2,
-        label: "Contact us",
-        href: "/contact-us",
-      },
-      {
-        id: 3,
-        label: "Careers",
-        href: "/careers",
-      },
+  list: [
+    {
+      title: "Products",
+      links: [
+        {
+          id: 1,
+          label: "Feature",
+          href: "/",
+        },
+        {
+          id: 2,
+          label: "Pricing",
+          href: "/pricing",
+        },
+        {
+          id: 3,
+          label: "Case Studies",
+          href: "/case-studies",
+        },
+        {
+          id: 4,
+          label: "Reviews",
+          href: "/reviews",
+        },
+        {
+          id: 5,
+          label: "Updates",
+          href: "/updates",
+        },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        {
+          id: 1,
+          label: "About",
+          href: "/about",
+        },
+        {
+          id: 2,
+          label: "Contact us",
+          href: "/contact-us",
+        },
+        {
+          id: 3,
+          label: "Careers",
+          href: "/careers",
+        },
 
-      {
-        id: 4,
-        label: "Culture",
-        href: "/culture",
-      },
-      {
-        id: 5,
-        label: "Blog",
-        href: "/blog",
-      },
-    ],
-  },
-  list3: {
-    title: "Support",
-    links: [
-      {
-        id: 1,
-        label: "Getting started",
-        href: "/getting-started",
-      },
-      {
-        id: 2,
-        label: "Help center",
-        href: "/help-center",
-      },
-      {
-        id: 3,
-        label: "Server status",
-        href: "/server-status",
-      },
-      {
-        id: 4,
-        label: "Report a bug",
-        href: "/report-a-bug",
-      },
-      {
-        id: 5,
-        label: "Chat support",
-        href: "/chat-support",
-      },
-    ],
-  },
-  list4: {
-    title: "Downloads",
-    links: [
-      {
-        id: 1,
-        label: "iOS",
-        href: "/",
-      },
-      {
-        id: 2,
-        label: "Android",
-        href: "/",
-      },
-      {
-        id: 3,
-        label: "Mac",
-        href: "/",
-      },
-      {
-        id: 4,
-        label: "Window",
-        href: "/",
-      },
-      {
-        id: 5,
-        label: "Chrome",
-        href: "/",
-      },
-    ],
-  },
+        {
+          id: 4,
+          label: "Culture",
+          href: "/culture",
+        },
+        {
+          id: 5,
+          label: "Blog",
+          href: "/blog",
+        },
+      ],
+    },
+    {
+      title: "Support",
+      links: [
+        {
+          id: 1,
+          label: "Getting started",
+          href: "/getting-started",
+        },
+        {
+          id: 2,
+          label: "Help center",
+          href: "/help-center",
+        },
+        {
+          id: 3,
+          label: "Server status",
+          href: "/server-status",
+        },
+        {
+          id: 4,
+          label: "Report a bug",
+          href: "/report-a-bug",
+        },
+        {
+          id: 5,
+          label: "Chat support",
+          href: "/chat-support",
+        },
+      ],
+    },
+    {
+      title: "Downloads",
+      links: [
+        {
+          id: 1,
+          label: "iOS",
+          href: "/",
+        },
+        {
+          id: 2,
+          label: "Android",
+          href: "/",
+        },
+        {
+          id: 3,
+          label: "Mac",
+          href: "/",
+        },
+        {
+          id: 4,
+          label: "Window",
+          href: "/",
+        },
+        {
+          id: 5,
+          label: "Chrome",
+          href: "/",
+        },
+      ],
+    },
+  ],
+  // list1: {
+  //   title: "Products",
+  //   links: [
+  //     {
+  //       id: 1,
+  //       label: "Feature",
+  //       href: "/",
+  //     },
+  //     {
+  //       id: 2,
+  //       label: "Pricing",
+  //       href: "/pricing",
+  //     },
+  //     {
+  //       id: 3,
+  //       label: "Case Studies",
+  //       href: "/case-studies",
+  //     },
+  //     {
+  //       id: 4,
+  //       label: "Reviews",
+  //       href: "/reviews",
+  //     },
+  //     {
+  //       id: 5,
+  //       label: "Updates",
+  //       href: "/updates",
+  //     },
+  //   ],
+  // },
+  // list2: {
+  //   title: "Company",
+  //   links: [
+  //     {
+  //       id: 1,
+  //       label: "About",
+  //       href: "/about",
+  //     },
+  //     {
+  //       id: 2,
+  //       label: "Contact us",
+  //       href: "/contact-us",
+  //     },
+  //     {
+  //       id: 3,
+  //       label: "Careers",
+  //       href: "/careers",
+  //     },
+
+  //     {
+  //       id: 4,
+  //       label: "Culture",
+  //       href: "/culture",
+  //     },
+  //     {
+  //       id: 5,
+  //       label: "Blog",
+  //       href: "/blog",
+  //     },
+  //   ],
+  // },
+  // list3: {
+  //   title: "Support",
+  //   links: [
+  //     {
+  //       id: 1,
+  //       label: "Getting started",
+  //       href: "/getting-started",
+  //     },
+  //     {
+  //       id: 2,
+  //       label: "Help center",
+  //       href: "/help-center",
+  //     },
+  //     {
+  //       id: 3,
+  //       label: "Server status",
+  //       href: "/server-status",
+  //     },
+  //     {
+  //       id: 4,
+  //       label: "Report a bug",
+  //       href: "/report-a-bug",
+  //     },
+  //     {
+  //       id: 5,
+  //       label: "Chat support",
+  //       href: "/chat-support",
+  //     },
+  //   ],
+  // },
+  // list4: {
+  //   title: "Downloads",
+  //   links: [
+  //     {
+  //       id: 1,
+  //       label: "iOS",
+  //       href: "/",
+  //     },
+  //     {
+  //       id: 2,
+  //       label: "Android",
+  //       href: "/",
+  //     },
+  //     {
+  //       id: 3,
+  //       label: "Mac",
+  //       href: "/",
+  //     },
+  //     {
+  //       id: 4,
+  //       label: "Window",
+  //       href: "/",
+  //     },
+  //     {
+  //       id: 5,
+  //       label: "Chrome",
+  //       href: "/",
+  //     },
+  //   ],
+  // },
   newLetter: {
     title: "Subscribe to our newsletter",
     description: "Subscribe to our newsletter to get latest news and updates.",

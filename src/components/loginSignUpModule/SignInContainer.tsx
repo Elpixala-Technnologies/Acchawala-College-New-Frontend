@@ -97,7 +97,7 @@ export function SignInContainer({
   const mobileRegex = /^[0-9]{10}$/;
 
   return (
-    <div className="flex h-full flex-col overflow-y-auto p-6 py-10 text-black [flex:6] sm:relative md:justify-center">
+    <div className="flex h-full flex-col  md:p-6 p-4 py-10 text-black [flex:6] sm:relative md:justify-center">
       <button
         className="absolute right-[0.05rem] top-[0.05rem] w-max p-3 text-lg font-normal text-zinc-600 hover:underline"
         onClick={closePopup}
