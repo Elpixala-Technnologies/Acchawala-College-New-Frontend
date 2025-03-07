@@ -1,4 +1,4 @@
-import { getUserData } from "@/graphql/profileQuery/profile";
+import { getUserData, getUserData2 } from "@/graphql/profileQuery/profile";
 import { useAppSelector } from "@/Redux";
 import { useQuery } from "@apollo/client";
 
@@ -9,7 +9,7 @@ const useUserData = () => {
   const jwt = useAppSelector((state) => state.auth.token);
 
   // Use Apollo's useQuery hook
-  const { data, loading, error, refetch } = useQuery(getUserData, {
+  const { data, loading, error, refetch } = useQuery(getUserData2, {
     variables: { ID: userId },
     context: {
       headers: {
@@ -19,7 +19,7 @@ const useUserData = () => {
     skip: !userId, // Skip query if userId is not available
   });
   console.log(userId, jwt)
-  console.log(data)
+  console.log(data, " data dtaa")
 
   return {
     data: data?.usersPermissionsUser?.data,
