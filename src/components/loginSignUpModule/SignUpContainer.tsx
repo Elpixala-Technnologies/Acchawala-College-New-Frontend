@@ -152,7 +152,7 @@ export function SignUpContainer({
   const mobileRegex = /^[0-9]{10}$/;
 
   return (
-    <div className="flex min-h-[90vh] flex-col overflow-y-auto rounded-b rounded-r p-8 text-black [flex:6] sm:relative md:justify-center">
+    <div className="flex min-h-[90vh] h-full flex-col rounded-b rounded-r p-4 md:p-8 text-black [flex:6] sm:relative md:justify-center">
       <button
         className="absolute right-[0.05rem] top-[0.05rem] w-max p-3 text-lg font-normal text-zinc-600 hover:underline"
         onClick={closePopup}
@@ -255,7 +255,7 @@ export function SignUpContainer({
               <p className="text-xs text-red-600">{errors.email.message}</p>
             )}
             <select
-              className="mt-5 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-zinc-500 outline-none duration-200 focus:outline-zinc-300"
+              className="mt-5 w-full rounded-lg border border-gray-200 bg-white px-3 py-3 text-sm text-zinc-500 outline-none duration-200 focus:outline-zinc-300"
               {...register("course", {
                 required: "Course selection is required",
               })}
@@ -273,7 +273,7 @@ export function SignUpContainer({
             <div className="mt-5 flex w-full gap-5 max-sm:flex-col">
               <div className="w-full flex-[1]">
                 <select
-                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-zinc-500 outline-none duration-200 focus:outline-zinc-300"
+                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-3 text-sm text-zinc-500 outline-none duration-200 focus:outline-zinc-300"
                   {...register("state", {
                     required: "Selecting state is required",
                   })}
@@ -302,7 +302,7 @@ export function SignUpContainer({
               </div>
               <div className="w-full flex-[1]">
                 <select
-                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-zinc-500 outline-none duration-200 focus:outline-zinc-300"
+                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-3 text-sm text-zinc-500 outline-none duration-200 focus:outline-zinc-300"
                   {...register("city", {
                     required: "City selection is required",
                   })}

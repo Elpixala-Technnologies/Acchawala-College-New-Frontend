@@ -25,6 +25,8 @@ function Profile() {
   useEffect(() => {
     if (!loading && !userProfileData) {
       refetch();
+      console.log(userProfileData)
+
     }
   }, [userProfileData, refetch, loading]);
   useEffect(() => {
@@ -63,11 +65,10 @@ function Profile() {
         className="relative grid grid-cols-12 gap-5"
       >
         <aside
-          className={`z-30 col-span-3 rounded-2xl bg-white py-5 shadow-2xl max-lg:col-span-4 ${
-            mobileMenu
-              ? "max-sm:fixed max-sm:left-0 max-sm:top-0 max-sm:bg-white"
-              : "max-sm:hidden"
-          }`}
+          className={`z-30 col-span-3 rounded-2xl bg-white py-5 shadow-2xl max-lg:col-span-4 ${mobileMenu
+            ? "max-sm:fixed max-sm:left-0 max-sm:top-0 max-sm:bg-white"
+            : "max-sm:hidden"
+            }`}
         >
           <ul className="mx-5 flex flex-col justify-between gap-5 text-lg">
             {/* Tabs */}
