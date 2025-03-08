@@ -23,11 +23,11 @@ export function LoginSignUpModule({
 
   return (
     <section
-      className="fixed -top-8 left-0 z-50 flex h-screen w-full items-center justify-center bg-zinc-950 bg-opacity-70 max-sm:mt-20 max-sm:h-[90vh]"
+      className="fixed -top-5 left-0 z-50 flex h-screen w-full items-center justify-center bg-zinc-950 bg-opacity-70 max-sm:mt-20 max-sm:h-[90vh]"
       onClick={handleOverlayClick}
     >
       {/* Module  */}
-      <div className="relative z-10 flex h-max w-full justify-center overflow-y-hidden rounded-3xl border-8 border-white bg-white shadow-lg max-sm:h-full max-sm:min-h-[100vh] max-sm:flex-col max-sm:items-center max-sm:rounded-none max-sm:pt-10 pt-10 md:max-w-[960px]">
+      <div className="relative z-10 flex h-max w-full justify-center overflow-y-hidden rounded-3xl border-8 border-white bg-white shadow-lg max-sm:h-full max-sm:min-h-[100vh] max-sm:flex-col max-sm:items-center max-sm:rounded-none max-sm:pt-10 md:max-w-[960px]">
         {/* Left Side */}
         <Image
           src={login_bg}
