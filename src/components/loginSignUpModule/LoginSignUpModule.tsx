@@ -27,7 +27,7 @@ export function LoginSignUpModule({
       onClick={handleOverlayClick}
     >
       {/* Module  */}
-      <div className="relative z-10 flex h-max w-full justify-center overflow-y-hidden rounded-3xl border-8 border-white bg-white shadow-lg max-sm:h-full max-sm:min-h-[100vh] max-sm:flex-col max-sm:items-center max-sm:rounded-none max-sm:pt-20 md:max-w-[960px]">
+      <div className="relative z-10 flex h-max w-full justify-center overflow-y-hidden rounded-3xl border-8 border-white bg-white shadow-lg max-sm:h-full max-sm:min-h-[100vh] max-sm:flex-col max-sm:items-center max-sm:rounded-none max-sm:pt-10 pt-10 md:max-w-[960px]">
         {/* Left Side */}
         <Image
           src={login_bg}

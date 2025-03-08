@@ -99,7 +99,7 @@ export function SignInContainer({
   return (
     <div className="flex h-full flex-col  md:p-6 p-4 py-10 text-black [flex:6] sm:relative md:justify-center">
       <button
-        className="absolute right-[0.05rem] top-[1.5rem] w-max p-3 text-lg font-normal text-zinc-600 hover:underline"
+        className="absolute right-[0.05rem] top-[0.1rem] w-max p-3 text-lg font-normal text-zinc-600 hover:underline"
         onClick={closePopup}
         type="button"
       >
