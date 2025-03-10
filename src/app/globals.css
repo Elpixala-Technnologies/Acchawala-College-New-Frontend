@@ -740,23 +740,17 @@ input::-webkit-outer-spin-button
   -webkit-appearance: none;
   margin: 0;
 }
-input[type=date]::-webkit-datetime-edit-text {
-  -webkit-appearance: none;
-  height: 100%;
-  display: none;
+input[type=date]{
+  height: 100% !important;
 }
-input[type=date]::-webkit-datetime-edit-month-field{
-  -webkit-appearance: none;
-  display: none;
-}
-input[type=date]::-webkit-datetime-edit-day-field {
+.custom-date-style::-webkit-datetime-edit-text,
+.custom-date-style::-webkit-datetime-edit-month-field,
+.custom-date-style::-webkit-datetime-edit-day-field,
+.custom-date-style::-webkit-datetime-edit-year-field {
   -webkit-appearance: none;
   display: none;
 }
-input[type=date]::-webkit-datetime-edit-year-field {
-  -webkit-appearance: none;
-  display: none;
-}
+
 /* Hide number input arrows in Chrome, Safari, Edge, Opera */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
