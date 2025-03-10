@@ -11,7 +11,7 @@ export const Input = React.forwardRef(function Input(
     <div className="relative mt-5  w-full min-w-[200px]">
       <input
         type={type}
-        className={`peer h-full w-full rounded-md border border-gray-300 bg-transparent px-3 pt-5 pb-2 text-sm text-gray-900 outline-none focus:border-2 focus:border-orange-500 focus:ring-0 ${className}`}
+        className={`peer h-full w-full rounded-md border border-gray-300 bg-transparent px-3 py-3.5 text-sm text-gray-900 outline-none focus:border-2 focus:border-orange-500 focus:ring-0 ${className}`}
         ref={ref}
         {...props}
         id={id}
@@ -20,6 +20,7 @@ export const Input = React.forwardRef(function Input(
         onBlur={(e) => setIsFocused(e.target.value !== "")}
         style={{
           appearance: type === "date" ? "none" : "auto", // Remove default browser styles for date input
+          display: (type && (props?.value?.length == 0)) === "date" ? "none" : "auto"
         }}
       />
       {label && (

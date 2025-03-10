@@ -135,7 +135,7 @@ export function SignInContainer({
                 renderInput={(props) => (
                   <input
                     {...props}
-                    className="h-12 w-12 rounded-md border-2 border-gray-300 text-center text-xl focus:border-orange-500 focus:outline-none"
+                    className="h-12 w-full rounded-md border-2 border-gray-300 text-center text-xl focus:border-orange-500 focus:outline-none"
                     style={{
                       WebkitAppearance: "none",
                       MozAppearance: "textfield",
@@ -160,8 +160,8 @@ export function SignInContainer({
                 },
               })}
             />
-            {errors.number && typeof errors.number.message === "string" && (
-              <p className="text-xs text-red-600">{errors.number.message}</p>
+            {errors?.number && typeof errors?.number?.message === "string" && (
+              <p className="text-xs text-red-600">{errors?.number?.message}</p>
             )}
           </>
         )}

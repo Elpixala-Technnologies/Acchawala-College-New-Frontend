@@ -62,7 +62,7 @@ function Profile() {
       <Wrapper
         as="div"
         containerClassName="mt-8 pb-8"
-        className="relative grid grid-cols-12 gap-5"
+        className="relative grid grid-cols-12 md:gap-5 gap-3"
       >
         <aside
           className={`z-30 col-span-3 rounded-2xl bg-white py-5 shadow-2xl max-lg:col-span-4 ${mobileMenu
