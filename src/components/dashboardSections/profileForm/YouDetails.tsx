@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Input } from "@/components/FormInput";
+// import { Input } from "@/components/FormInput";
 import { FaEdit } from "react-icons/fa";
 import { Button } from "@/components/Button";
 import { useQuery } from "@apollo/client";
@@ -14,6 +14,7 @@ import useUserData from "@/customHook/useProfile";
 import { MdOutlineAttachEmail } from "react-icons/md";
 import { CiMobile4 } from "react-icons/ci";
 import useUpdateUserData from "@/customHook/useUpdateUserData";
+import { Input } from "@/components/loginSignUpModule/Input";
 
 export function YourDetails({ setNextButtonState }: any) {
   const [error, setError] = useState("");
@@ -147,7 +148,7 @@ export function YourDetails({ setNextButtonState }: any) {
     <div>
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
-        className="grid grid-cols-1 gap-5 md:grid-cols-2"
+        className="grid grid-cols-1 md:gap-5 gap-3 md:grid-cols-2"
       >
         {/* Full Name */}
         <div className="space-y-2">

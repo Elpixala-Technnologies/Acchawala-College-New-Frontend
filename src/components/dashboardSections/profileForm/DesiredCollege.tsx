@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { Button } from "@/components/Button";
-import { Input } from "@/components/FormInput";
+// import { Input } from "@/components/FormInput";
 import { FaTrash } from "react-icons/fa";
 import { RxDragHandleDots1 } from "react-icons/rx";
 import { Reorder } from "framer-motion";
@@ -10,6 +10,7 @@ import { useQuery } from "@apollo/client";
 import { getAllCollegesByName } from "@/graphql/profileQuery/profile";
 import useUpdateUserData from "@/customHook/useUpdateUserData";
 import useUserData from "@/customHook/useProfile";
+import { Input } from "@/components/loginSignUpModule/Input";
 
 export function DesiredCollege({ setNextButtonState }: any) {
   const [success, setSuccess] = useState("");
@@ -39,7 +40,7 @@ export function DesiredCollege({ setNextButtonState }: any) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      colleges: [{ college: "", status: "applying", priority: 0 }],
+      colleges: [{ college: "", status: "", priority: 0 }],
     },
   });
   const [active, setActive] = useState(0);
@@ -135,7 +136,7 @@ export function DesiredCollege({ setNextButtonState }: any) {
               className="flex items-center gap-2 max-md:flex-wrap"
             >
               <div className="relative flex w-full items-center gap-2">
-                <h6 className="borderedText absolute left-5 top-0 select-none text-5xl font-bold">
+                <h6 className="borderedText absolute left-4 top-0 select-none text-5xl font-bold">
                   {index + 1}
                 </h6>
                 <RxDragHandleDots1 className="text-4xl text-orange-500" />

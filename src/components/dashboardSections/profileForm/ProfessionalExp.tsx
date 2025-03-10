@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { Button } from "@/components/Button";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import { Input } from "@/components/FormInput";
+// import { Input } from "@/components/FormInput";
 import { Reorder } from "framer-motion";
+import { Input } from "@/components/loginSignUpModule/Input";
 
 export function ProfessionalExp({ setNextButtonState }: any) {
   const {
@@ -117,10 +118,10 @@ export function ProfessionalExp({ setNextButtonState }: any) {
                 </div>
                 {(errors.companies?.[index]?.from ||
                   errors.companies?.[index]?.to) && (
-                  <p className="text-xs text-red-600">
-                    Both dates are required
-                  </p>
-                )}
+                    <p className="text-xs text-red-600">
+                      Both dates are required
+                    </p>
+                  )}
               </div>
               {fields.length > 1 && (
                 <Button

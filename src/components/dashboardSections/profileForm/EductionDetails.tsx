@@ -1,10 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Input } from "@/components/FormInput";
+// import { Input } from "@/components/FormInput";
 import { Button } from "@/components/Button";
 import useUserData from "@/customHook/useProfile";
 import useUpdateUserData from "@/customHook/useUpdateUserData";
+import { Input } from "@/components/loginSignUpModule/Input";
 
 export function EducationDetails({ setNextButtonState }: any) {
   const {
@@ -518,21 +519,21 @@ export function EducationDetails({ setNextButtonState }: any) {
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             {(watch("isEntranceExam") === "yes" ||
               watch("isEntranceExam") === "booked") && (
-              <div className="space-y-2">
-                <Input
-                  label="Entrance Exam Name"
-                  type="text"
-                  {...register("entranceExamName", {
-                    required: "Entrance Exam Name is required",
-                  })}
-                />
-                {errors.entranceExamName && (
-                  <p className="text-xs text-red-600">
-                    {errors.entranceExamName.message}
-                  </p>
-                )}
-              </div>
-            )}
+                <div className="space-y-2">
+                  <Input
+                    label="Entrance Exam Name"
+                    type="text"
+                    {...register("entranceExamName", {
+                      required: "Entrance Exam Name is required",
+                    })}
+                  />
+                  {errors.entranceExamName && (
+                    <p className="text-xs text-red-600">
+                      {errors.entranceExamName.message}
+                    </p>
+                  )}
+                </div>
+              )}
             {watch("isEntranceExam") === "yes" && (
               <div className="space-y-2">
                 <Input

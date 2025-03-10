@@ -13,7 +13,7 @@ import { DesiredCollege } from "./DesiredCollege";
 import { ProfessionalExp } from "./ProfessionalExp";
 import { AbroadCollege } from "./StudyAbroad";
 
-export default function Profile({}: any) {
+export default function Profile({ }: any) {
   const stepItems = [
     <span key="1" role="img" aria-label="step-1">
       <LiaUserSecretSolid className="m-2 text-2xl" />
@@ -81,9 +81,9 @@ export default function Profile({}: any) {
         <div className="pt-10">
           <ProfessionalExp setNextButtonState={setNextButtonState} />
         </div>
-        <div className="pt-10">
+        {/* <div className="pt-10">
           <AbroadCollege />
-        </div>
+        </div> */}
       </Stepper>
     </div>
   );

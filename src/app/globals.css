@@ -723,7 +723,7 @@ select, input {
 }
 
 /* Add a down-arrow icon */
-select, input {
+select {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M7 10l5 5 5-5z"/></svg>');
   background-repeat: no-repeat;
   background-position: right 10px center;
@@ -742,6 +742,7 @@ input::-webkit-outer-spin-button
 }
 input[type=date]::-webkit-datetime-edit-text {
   -webkit-appearance: none;
+  height: 100%;
   display: none;
 }
 input[type=date]::-webkit-datetime-edit-month-field{
@@ -755,4 +756,15 @@ input[type=date]::-webkit-datetime-edit-day-field {
 input[type=date]::-webkit-datetime-edit-year-field {
   -webkit-appearance: none;
   display: none;
+}
+/* Hide number input arrows in Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide number input arrows in Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
